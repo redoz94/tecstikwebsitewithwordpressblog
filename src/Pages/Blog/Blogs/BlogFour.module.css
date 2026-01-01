@@ -1,0 +1,170 @@
+.three_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .socialImg {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .socialImg img {
+    object-fit: contain;
+    width: 20px;
+  }
+  
+  .future_heading {
+    width: 700px;
+    text-align: center;
+  }
+  
+  .CircleImg {
+    width: 80% !important;
+    display: flex !important;
+    margin: auto !important;
+  }
+  
+  .main___conatiner {
+    display: flex;
+    margin-top: 40px;
+  }
+  
+  .firstpara {
+    width: 200%;
+  }
+  
+  .firstpara p {
+    /* margin: 0px 20px; */
+    width: 97%;
+    font-size: 1.1rem;
+  }
+  
+  .second__para_container {
+    width: 100%;
+  }
+  
+  .second__para_container1 {
+  }
+  
+  .second__para_container1__left {
+    padding: 0px 12px;
+  }
+  
+  .second__para_container1 p {
+    font-weight: normal !important;
+  }
+  
+  .second__para_container p {
+    padding: 0px 5px;
+    font-weight: bold;
+  }
+  
+  .border__line {
+    height: 330px;
+    width: 1px;
+    background-color: #707070;
+  }
+  
+  .border__line1 {
+    height: 300px;
+    width: 1px;
+    background-color: #707070;
+  }
+  
+  
+  .main___conatiner1,
+  .main___conatiner2 {
+    padding: 20px 0px;
+  }
+  
+  .main___conatiner1 h3,
+  .main___conatiner2 h3 {
+    padding: 30px 0px;
+  }
+/*   
+  .main___conatiner1 ul {
+    padding: 0px 70px;
+  }
+   */
+  .img_container img {
+    width: 100%;
+  }
+  
+  .islamicImg{
+    height: 300px;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .islamicImg_container{
+    margin: auto;
+    display: flex;
+  }
+  
+  .img_container1 img {
+    width: 100%;
+    margin: 20px 0px;
+  }
+  
+  .main___conatiner2 ol li {
+    padding: 10px 0px;
+  }
+  
+  
+  
+  .Unleashing_heading{
+    width: 700px;
+    text-align: center;
+  }
+  
+  
+  .islamic__ul li{
+    padding: 10px 0px;
+  }
+  
+  .kollectImg{
+    width: 600px;
+    object-fit: contain;
+    height: 300px;
+  }
+  
+
+  .main___conatiner_work_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+  }
+  
+  /* add media query here */
+  
+  @media screen and (max-width: 900px) {
+    .main___conatiner {
+      flex-direction: column-reverse;
+  
+    }
+  
+    .firstpara{
+      text-align: center;
+      width: 100%;
+    }
+  
+    .border__line{
+      display: none;
+    }
+    .second__para_container{
+      text-align: center;
+    }
+  
+    .border__line1{
+      display: none;
+    }
+  
+    .Unleashing_heading{
+      width: 90%;
+    }
+  }
+  

@@ -1,0 +1,280 @@
+#blockChain {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+  background: url("./BlockChainBanner.jpg") no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin-top: 5%;
+}
+
+#blockChain .hero-content {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* z-index: 10; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#blockChain .hero-content h2 {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  #blockChain .hero-content h2 {
+    font-size: 34px;
+  }
+
+  .text_center {
+    text-align: center !important;
+  }
+
+  .defi_margin {
+    margin: 20px 0px !important;
+  }
+}
+
+
+
+#blockChainImage {
+  padding: 60px 0 30px 0;
+}
+
+#blockChainImage .about-img {
+  overflow: hidden;
+}
+
+#blockChainImage .about-img img {
+  margin-left: -15px;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  #blockChainImage .about-img {
+    height: auto;
+  }
+
+  #blockChainImage .about-img img {
+    margin-left: 0;
+    padding-bottom: 30px;
+  }
+
+  #blockChain {
+    height: 250px !important;
+    width: 100% !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+#blockChainImage .content h2 {
+  color: #0c2e8a;
+  font-weight: 700;
+  font-size: 36px;
+  font-family: "Raleway", sans-serif;
+}
+
+
+#blockChainImage .content p {
+  line-height: 26px;
+}
+
+#blockChainImage .content p:last-child {
+  margin-bottom: 0;
+}
+
+
+
+
+/*  */
+#dollarText {
+  font-family: var(--global-body-font-family);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: #37000A;
+  line-height: 1.6;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+
+/*--------------------------------------------------------------
+# Specials
+--------------------------------------------------------------*/
+.specials {
+  overflow: hidden;
+  /* margin-left: -3%; */
+}
+
+.specials .nav-tabs {
+  border: 0;
+}
+
+.specials .nav-link {
+  border: 0;
+  /* padding: 12px 15px 12px 0; */
+  transition: 0.3s;
+  color: #433f39;
+  border-radius: 0;
+  border-right: 2px solid #e8e7e4;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.specials .nav-link:hover {
+  color: #ffb03b;
+}
+
+.specials .nav-link.active {
+  color: #ffb03b;
+  border-color: #ffb03b;
+}
+
+.specials .tab-pane.active {
+  -webkit-animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.specials .details h3 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #433f39;
+}
+
+.specials .details p {
+  color: #777777;
+}
+
+.specials .details p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .specials .nav-link {
+    border: 0;
+    padding: 15px;
+  }
+
+  .specials .nav-link.active {
+    color: #fff;
+    background: #ffb03b;
+  }
+}
+
+.specials-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.specials-title h2 {
+  margin: 15px 0 0 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #5f5950;
+  font-family: "Satisfy", sans-serif;
+}
+
+/* .specials-title h2 span {
+    color: #ffb03b;
+  } */
+.specials-title p {
+  margin: 15px auto 0 auto;
+  font-weight: 300;
+}
+
+@media (min-width: 1024px) {
+  .specials-title p {
+    width: 50%;
+  }
+}
+
+.events .specials-title h2 {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------
+  # BlockChainServices
+  --------------------------------------------------------------*/
+.BlockChainServices .icon-box {
+  padding: 50px 20px;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  text-align: center;
+  border: 1px solid #ebe6e4;
+  height: 150px;
+  position: relative;
+  background: #faf9f8;
+}
+
+.BlockChainServices .icon {
+  position: absolute;
+  top: -36px;
+  left: calc(50% - 36px);
+  transition: 0.2s;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 72px;
+  height: 72px;
+  background: #f03c02;
+}
+
+.BlockChainServices .icon i {
+  color: #fff;
+  font-size: 24px;
+  line-height: 0;
+}
+
+.BlockChainServices .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.BlockChainServices .title a {
+  color: #343a40;
+}
+
+.BlockChainServices .icon-box:hover .icon {
+  background: #fff;
+  border: 2px solid #f03c02;
+}
+
+.BlockChainServices .icon-box:hover .icon i {
+  color: #f03c02;
+}
+
+.BlockChainServices .icon-box:hover .title a {
+  color: #f03c02;
+}
+
+
+
+.BlockChainServices .description {
+  line-height: 24px;
+  font-size: 14px;
+}
+
+#blockchinImage {
+
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+}

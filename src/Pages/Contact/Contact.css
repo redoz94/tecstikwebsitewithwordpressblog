@@ -1,0 +1,185 @@
+#Contact {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+  background: url("./ContactUS.jpg") no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin-top: 5%;
+}
+
+#Contact .hero-content {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* z-index: 10; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#Contact .hero-content h2 {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  #Contact .hero-content h2 {
+    font-size: 34px;
+  }
+}
+
+#ContactCount {
+  background-image: url(https://buildmydapp.co/wp-content/uploads/2021/12/subscribe-bg.png);
+  background-position: center center;
+  background-repeat: repeat;
+  background-size: cover;
+  /* opacity: .55; */
+  background-color: #19143a;
+  padding: 70px 0 60px;
+}
+
+#ContactCount .count-box {
+  padding: 30px 30px 25px 30px;
+  width: 75%;
+
+  position: relative;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.123);
+}
+
+/*--------------------------------------------------------------
+# Our Services
+--------------------------------------------------------------*/
+
+.ContactCount .icon-box {
+  text-align: center;
+  border: 1px solid #ededed;
+  padding: 80px 20px;
+  transition: all ease-in-out 0.3s;
+  /* background-color: #50d8af; */
+  box-shadow: 0 4px 8px 0 orangered, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ContactCount .icon-box .icon {
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  background: #e96b56;
+  border-radius: 5px;
+  transition: all 0.3s ease-out 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transform-style: preserve-3d;
+}
+
+.ContactCount .icon-box .icon i {
+  color: #fff;
+  font-size: 28px;
+}
+
+.ContactCount .icon-box .icon::before {
+  position: absolute;
+  content: "";
+  left: -8px;
+  top: -8px;
+  height: 100%;
+  width: 100%;
+  background: #fbe2dd;
+  border-radius: 5px;
+  transition: all 0.3s ease-out 0s;
+  transform: translateZ(-1px);
+}
+
+.ContactCount .icon-box h4 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.ContactCount .icon-box h4 a {
+  color: #545454;
+}
+
+.ContactCount .icon-box p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.ContactCount .icon-box:hover {
+  background: #e96b56;
+  border-color: #e96b56;
+  /* border-radius: 50px; */
+  /* width: 64px;
+    height: 64px; */
+}
+
+.ContactCount .icon-box:hover .icon {
+  background: #fff;
+}
+
+.ContactCount .icon-box:hover .icon::before {
+  background: #ef9383;
+}
+
+.ContactCount .icon-box:hover h4 a,
+.services .icon-box:hover p {
+  color: #fff;
+}
+
+#googleMapbtn {
+  width: 47%;
+}
+
+@media (max-width: 768px) {
+  #locationMap {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  #googleMapbtn {
+    display: block;
+    margin-top: -10%;
+    margin-bottom: 5%;
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 24px;
+    color: #fff;
+    transition: 0.4s;
+    background: #d1095e;
+    width: 70% !important;
+  }
+
+  #Contact {
+    height: 250px !important;
+    width: 100% !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+#googleMapbtn {
+  display: block;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 14%;
+  border: 0;
+  border-radius: 50px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+  background: #d1095e;
+}

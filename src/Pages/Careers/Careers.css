@@ -1,0 +1,567 @@
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+
+.banner_container {
+  position: relative;
+  width: 100%;
+  top: -67px;
+}
+
+#banner_1_image {
+  background-image: url(../About/About-01-1-2.png);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+#banner_2_image {
+  background-image: url(../Product/products.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+#banner_3_image {
+  background-image: url(../Portfolio/PorflioImage1.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_4_image {
+  background-image: url(../Blog/BlogImages/Blog.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_5_image {
+  background-image: url(../Careers/careersBanner1.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_6_image {
+  background-image: url(../Contact/ContactUS1.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_7_image {
+  background-image: url(../Services/Blockchain/BlockChainBanner\ \(2\).png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_8_image {
+  background-image: url(../Services/MobileApp/top\ \(1\).png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 90vh;
+  width: 100%;
+}
+
+
+#banner_9_image {
+  background-image: url(../Services/Web\ and\ Mobile/laptop-image1.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_10_image {
+  background-image: url(../Services/Cloud/cloudcomputing1.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+#banner_11_image {
+  background-image: url(../Blog/BlogImages/blog3images/One.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+#banner_12_image {
+  background-image: url(../Blog/BlogImages/NavigPakistan.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_13_image {
+  background-image: url(../Blog/BlogImages/blog3images/blog3.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+/*  */
+#banner_14_image {
+  background-image: url(../Blog/BlogImages/Blog4Images/laptop.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_15_image {
+  background-image: url(../Blog/BlogImages/blog5_banner.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_16_image {
+  background-image: url(../Blog/BlogImages/blogimages6/payment6banner.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_17_image {
+  background-image: url(../Blog/BlogImages/Blog7image/block7bannerimage.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+#banner_18_image {
+  background-image: url(../Blog/BlogImages/Blog8images/blog8bannerimage.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+#banner_19_image {
+  background-image: url(../Blog/BlogImages/Blog9images/BlogBannerImage.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+
+
+
+
+.background-image {
+  width: 100%;
+  height: 70vh;
+  display: block;
+  filter: contrast(80%);
+  padding: 0;
+  margin-top: 5%;
+  /* Increase contrast as needed */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Adjust the opacity (last value) as needed */
+}
+
+.banner-text {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  /* Set text color */
+  font-size: 64px;
+  /* Set font size */
+  font-weight: bold;
+  /* Set font weight */
+}
+
+.banner_text__1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  /* Set text color */
+  font-size: 50px;
+  /* Set font size */
+  font-weight: bold;
+  /* Set font weight */
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Careers {
+  width: 100%;
+  height: 60vh;
+  position: relative;
+  background: url("./careersBanner.PNG") no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin-top: 5%;
+  filter: contrast(30%);
+  /* Increase contrast as needed */
+}
+
+#Careers .hero-content {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* z-index: 10; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#Careers .hero-content h2 {
+  /* color: #0c2e8a; */
+  color: white;
+  margin-bottom: 30px;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+#Careers .hero-content h2 span {
+  color: #50d8af;
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+
+  .banner-text {
+    top: 70%;
+    width: 100%;
+    font-size: 20px !important;
+  }
+
+  .banner_text__1 {
+    font-size: 20px;
+    top: 60%;
+  }
+
+  .author_none {
+    display: none !important;
+  }
+
+
+  #Careers .hero-content h2 {
+    font-size: 34px;
+  }
+}
+
+#Careers .hero-content .btn-get-started,
+#hero .hero-content .btn-projects {
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 32px;
+  border-radius: 2px;
+  transition: 0.5s;
+  margin: 10px;
+  color: #fff;
+}
+
+#Careers .hero-content .btn-get-started {
+  background: #0c2e8a;
+  border: 2px solid #0c2e8a;
+}
+
+#Careers .hero-content .btn-get-started:hover {
+  background: none;
+  color: #0c2e8a;
+}
+
+#Careers .hero-content .btn-projects {
+  background: #50d8af;
+  border: 2px solid #50d8af;
+}
+
+#Careers .hero-content .btn-projects:hover {
+  background: none;
+  color: #50d8af;
+}
+
+#Careers .hero-slider {
+  /* z-index: 8; */
+  height: 60vh;
+}
+
+#Careers .hero-slider::before {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* z-index: 7; */
+}
+
+#Careers .hero-slider .swiper-slide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition-property: opacity;
+}
+
+/*--------------------------------------------------------------
+# Careers
+--------------------------------------------------------------*/
+.Careers .info-box {
+  color: #444444;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 20px 0 30px 0;
+}
+
+.Careers .info-box i {
+  font-size: 32px;
+  color: #e96b56;
+  border-radius: 50%;
+  padding: 8px;
+  border: 2px dotted #fef5f4;
+}
+
+act .info-box p {
+  padding: 0;
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.Careers .email-form {
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 30px;
+}
+
+.Careers .email-form .validate {
+  display: none;
+  color: red;
+  margin: 0 0 15px 0;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.Careers .email-form .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: left;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.Careers .email-form .error-message br+br {
+  margin-top: 25px;
+}
+
+.Careers .email-form .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.Careers .email-form .loading {
+  display: none;
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.Careers .email-form .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #18d26e;
+  border-top-color: #eee;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
+}
+
+.Careers .email-form input,
+.Careers .email-form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.Careers .email-form input:focus,
+.Careers .email-form textarea:focus {
+  border-color: #e96b56;
+}
+
+.Careers .email-form input {
+  padding: 10px 15px;
+}
+
+.Careers .email-form textarea {
+  padding: 12px 15px;
+}
+
+.Careers .email-form button[type="submit"] {
+  background: #e96b56;
+  border: 0;
+  border-radius: 50px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.Careers .email-form button[type="submit"]:hover {
+  background: #e6573f;
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#locationMap {
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  #locationMap {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  #googleMapbtn {
+    display: block;
+    margin-top: -10%;
+    margin-bottom: 5%;
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 24px;
+    color: #fff;
+    transition: 0.4s;
+    background: #d1095e;
+    width: 70% !important;
+  }
+
+  #Careers {
+    height: 250px !important;
+    width: 100% !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+}
+
+#googleMapbtn {
+  display: block;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 14%;
+  border: 0;
+  border-radius: 50px;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+  background: #d1095e;
+}

@@ -1,0 +1,1 @@
+export const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
