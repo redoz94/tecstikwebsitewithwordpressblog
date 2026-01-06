@@ -27,10 +27,10 @@ export default function HomeCard() {
                     data-aos-delay="200"
                   >
                     <img src={BlockChain} alt="" srcset="" height={80} />
-                    <h4 className="title">
+                    <h4 className="ts-tech-title">
                       <Link to="/WebAndMobile">Blockchain </Link>
                     </h4>
-                    <p className="description">
+                    <p className="ts-tech-desc">
                       With enhanced reliability, protection, clarity, and
                       trackability, you take advantage of the approaching future
                     </p>
