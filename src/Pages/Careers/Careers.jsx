@@ -124,10 +124,9 @@ const Careers = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    Those who apply for this position are expected to have a visible experience of 2 years
-                    with strong proficiency in JavaScript, MongoDB, Express, React.js, and Node.js. These
-                    candidates need to send a link to their portfolio which shows their past performance
-                    in such projects.
+                    Those who apply for this position are expected to have demonstrated proficiency in JavaScript, MongoDB, Express, React.js, and Node.js. The relevant
+                    candidates are to send links to their portfolio that highlight their past performance
+                    and project outcomes.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

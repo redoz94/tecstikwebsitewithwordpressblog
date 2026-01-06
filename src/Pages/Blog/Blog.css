@@ -204,3 +204,28 @@
     background-color: #0c2e8a !important; */
   }
 }
+
+.skeleton-img {
+  height: 180px;
+  background: #e9ecef;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.skeleton-line {
+  height: 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background: #e9ecef;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.skeleton-line.title {
+  height: 18px;
+  width: 80%;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.55; }
+  50% { opacity: 1; }
+  100% { opacity: 0.55; }
+}
