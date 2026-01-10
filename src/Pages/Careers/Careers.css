@@ -87,13 +87,14 @@
 
 
 #banner_9_image {
-  background-image: url(../Services/Web\ and\ Mobile/laptop-image1.png);
+  background-image: url(../Services/WebAndMobile/laptop-image1.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   height: 75vh;
   width: 100%;
 }
+
 
 
 #banner_10_image {

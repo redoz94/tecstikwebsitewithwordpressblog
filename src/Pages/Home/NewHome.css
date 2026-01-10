@@ -1,6 +1,10 @@
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+#cardlogo {
+  padding-top: 12px;
+}
+
 #hero {
   /* margin-top: -2%; */
   width: 100%;
@@ -132,6 +136,8 @@
 
   #cardlogo {
     margin-top: -10% !important;
+      padding-top: 12px;
+
   }
   .sponsor.col-md-3.col-xs-3.col-3 img {
     margin: 0 !important;
@@ -498,4 +504,146 @@
 
 #countNum {
   margin-left: 35%;
+}
+
+/* ===== HERO ===== */
+.ts-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.ts-hero-right img {
+  width: 100%;
+  height: auto;
+}
+
+.ts-primary-btn {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: #035192;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ts-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(3, 81, 146, 0.25);
+    color: #fff;
+
+}
+
+@media (max-width: 900px) {
+  .ts-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .ts-primary-btn {
+    margin-inline: auto;
+  }
+}
+/* ===============================
+   Spacing between hero laptop & icons
+   =============================== */
+
+.section_images {
+  margin-top: 72px;   /* desktop spacing */
+  margin-bottom: 52px;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .section_images {
+    margin-top: 56px;
+    margin-bottom: 56px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+  .section_images {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+/* =========================
+   HERO layout: proper container
+   ========================= */
+
+.ts-section {
+  width: 100%;
+}
+
+/* This is the missing piece: a real centered container with padding */
+.ts-container {
+  width: 100%;
+  max-width: 1200px;     /* keeps things centered and not too wide */
+  margin: 0 auto;        /* centers container */
+  padding-left: 56px;    /* ✅ pushes content away from left edge */
+  padding-right: 56px;
+  box-sizing: border-box;
+}
+
+/* Your hero grid stays the same */
+.ts-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.ts-hero-left {
+  max-width: 560px; /* keeps text block looking clean */
+}
+
+/* Responsive: reduce side padding on smaller screens */
+@media (max-width: 991px) {
+  .ts-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .ts-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .ts-hero-left {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .ts-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+.ts-eyebrow {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #444;
+}
+
+.ts-h1 {
+  margin: 0;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #333;
+}
+
+@media (max-width: 991px) {
+  .ts-h1 {
+    font-size: 36px;
+  }
 }

@@ -37,39 +37,28 @@ const NewHome = () => {
   return (
     <div id="NewHome">
       <Header currentPage={currentPage} />
-      <section
-        id="hero"
-        className="d-flex align-items-center"
-        style={{ marginBottom: "13%" }}
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-              <p data-aos="fade-up" className="homeh1">TecStik Technologies</p>
-              <h2 data-aos="fade-up" data-aos-delay="400" className="home">
-                Fintech Propelling Growth
-              </h2>
-              <div data-aos="fade-up" data-aos-delay="800" className="home">
-                <Link to="/Tecstik-Meet" className="btn-get-started">
-                  Meet TecStik
-                </Link>
-              </div>
-            </div>
-            <div
-              className="col-lg-6 order-1 order-lg-2 hero-img"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-              <img
-                src={bordaLabtop}
-                id="labtopImage"
-                className="img-fluid animated"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+<section className="ts-section">
+  <div className="ts-container ts-hero">
+    <div className="ts-hero-left">
+      <p className="ts-eyebrow">TecStik Technologies</p>
+
+      <h1 className="ts-h1">
+        Propelling your Business Growth
+      </h1>
+
+      <Link to="/Tecstik-Meet" className="ts-primary-btn">
+        Meet TecStik
+      </Link>
+    </div>
+
+    <div className="ts-hero-right">
+      <img
+        src={bordaLabtop}
+        alt="TecStik Platform"
+      />
+    </div>
+  </div>
+</section>
 
       <section className="sponsor section_images">
         <div className="column">
