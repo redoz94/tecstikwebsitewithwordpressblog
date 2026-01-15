@@ -16,7 +16,8 @@ import Careers from "./Pages/Careers/Careers";
 import Contact from "./Pages/Contact/Contact";
 
 import Blog from "./Pages/Blog/Blog";
-import BlogFile from "./Pages/Blog/Blog.jsx";
+import BlogFile from "./Pages/Blog/BlogFile";
+
 
 export default function App() {
   return (
@@ -38,7 +39,8 @@ export default function App() {
         <Route path="/TecStik-Contact" element={<Contact />} />
 
         <Route path="/TecStik-Blog" element={<Blog />} />
-        <Route path="/TecStik-Blog/:blogId" element={<BlogFile />} />
+      <Route path="/TecStik-Blog/:slug" element={<BlogFile />} />
+
       </Routes>
     </BrowserRouter>
   );
