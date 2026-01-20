@@ -211,7 +211,7 @@ export default function HomeCard() {
 
               <div className="flip-box-back">
                 <div className="w3-container w3-center">
-                  <h5 className="text-white mt-3">Cloud Provider</h5>
+                  <h5 className="text-white mt-3">Smart Storage</h5>
                   <table className="w3-table">
                     <thead>
                       <tr>

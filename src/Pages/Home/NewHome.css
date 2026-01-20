@@ -647,3 +647,102 @@
     font-size: 36px;
   }
 }
+/* =========================
+   HOME CONTACT FORM (under cards - left side of counts section)
+   ========================= */
+
+.ts-home-contact {
+  width: 100%;
+  max-width: 460px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.10);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.ts-home-contact-title {
+  margin: 0 0 6px 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #0b4b87;
+}
+
+.ts-home-contact-sub {
+  margin: 0 0 16px 0;
+  color: #555;
+}
+
+.ts-home-contact-form {
+  display: grid;
+  gap: 12px;
+}
+
+.ts-home-label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+}
+
+.ts-home-input,
+.ts-home-textarea {
+  width: 100%;
+  border: 1px solid #d6d6d6;
+  border-radius: 10px;
+  padding: 12px 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.ts-home-input:focus,
+.ts-home-textarea:focus {
+  border-color: #1e5cff;
+  box-shadow: 0 0 0 3px rgba(30, 92, 255, 0.12);
+}
+
+.ts-home-submit {
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  background: #1e5cff;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ts-home-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ts-home-status {
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ts-home-status.success {
+  background: #e9fff0;
+  color: #137a2a;
+  border: 1px solid #baf0c6;
+}
+
+.ts-home-status.error {
+  background: #fff0f0;
+  color: #9c1b1b;
+  border: 1px solid #f0baba;
+}
+
+.ts-home-mailto {
+  font-size: 13px;
+  color: #666;
+}
+
+.ts-home-mailto a {
+  color: #1e5cff;
+  font-weight: 700;
+  text-decoration: none;
+}

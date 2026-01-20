@@ -18,8 +18,6 @@ const NewHome = () => {
   const currentTab = searchParams.get("tab") || "0";
   const [currentPage, setCurrentPage] = useState("Home"); // Set the current page name
 
-
-
   const changeTab = (tab) => {
     searchParams.set("tab", tab);
     setSearchParams(searchParams);
@@ -37,28 +35,24 @@ const NewHome = () => {
   return (
     <div id="NewHome">
       <Header currentPage={currentPage} />
-<section className="ts-section">
-  <div className="ts-container ts-hero">
-    <div className="ts-hero-left">
-      <p className="ts-eyebrow">TecStik Technologies</p>
 
-      <h1 className="ts-h1">
-        Propelling your Business Growth
-      </h1>
+      <section className="ts-section">
+        <div className="ts-container ts-hero">
+          <div className="ts-hero-left">
+            <p className="ts-eyebrow">TecStik Technologies</p>
 
-      <Link to="/Tecstik-Meet" className="ts-primary-btn">
-        Meet TecStik
-      </Link>
-    </div>
+            <h3>Propelling your Business Growth</h3>
 
-    <div className="ts-hero-right">
-      <img
-        src={bordaLabtop}
-        alt="TecStik Platform"
-      />
-    </div>
-  </div>
-</section>
+            <Link to="/Tecstik-Meet" className="ts-primary-btn">
+              Meet TecStik
+            </Link>
+          </div>
+
+          <div className="ts-hero-right">
+            <img src={bordaLabtop} alt="TecStik Platform" />
+          </div>
+        </div>
+      </section>
 
       <section className="sponsor section_images">
         <div className="column">
@@ -85,6 +79,7 @@ const NewHome = () => {
                   className="aos-init aos-animate"
                 />
               </div>
+
               <div className="col-6 col-md-2 col-sm-6">
                 <img
                   src={blockchain}
@@ -100,7 +95,6 @@ const NewHome = () => {
         </div>
       </section>
 
-      {/*  */}
       <section id="ser" className="ser">
         <div className="container">
           <div className="section-title" data-aos="fade-up">
@@ -109,25 +103,26 @@ const NewHome = () => {
           </div>
         </div>
       </section>
+
       <br />
       <br />
+
       <HomeCard />
+
       <br />
       <br />
       <br />
+
       <section id="counts" className="counts">
         <div className="container">
           <div className="row">
+            {/* ✅ LEFT SIDE: Contact Form (replaces missing image area) */}
             <div
               className="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start"
               data-aos="fade-right"
               data-aos-delay="150"
             >
-              <img
-                src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/features-3.png"
-                alt="logo"
-                className="img-fluid"
-              />
+              <HomeContactForm />
             </div>
 
             <div
@@ -136,9 +131,16 @@ const NewHome = () => {
               data-aos-delay="300"
             >
               <div className="content d-flex flex-column justify-content-center">
-
-                <div className="row" style={{ width: '100%', position: "relative", left: "175px", textAlign: "center", display: "flex" }}>
-
+                <div
+                  className="row"
+                  style={{
+                    width: "100%",
+                    position: "relative",
+                    left: "175px",
+                    textAlign: "center",
+                    display: "flex",
+                  }}
+                >
                   <div className="col-md-6 d-md-flex align-items-md-stretch">
                     <div className="count-box ">
                       <i className="bi bi-clock"></i>
@@ -157,8 +159,11 @@ const NewHome = () => {
                   </div>
                 </div>
 
-                <div className="row center_45" id="countNum" style={{ width: '100%' }}>
-                  <div className="col-md-6 d-md-flex align-items-md-stretch" style={{ textAlign: 'center' }}>
+                <div className="row center_45" id="countNum" style={{ width: "100%" }}>
+                  <div
+                    className="col-md-6 d-md-flex align-items-md-stretch"
+                    style={{ textAlign: "center" }}
+                  >
                     <div className="count-box">
                       <i className="bi bi-emoji-smile"></i>
                       <span
@@ -175,7 +180,10 @@ const NewHome = () => {
                     </div>
                   </div>
 
-                  <div className="col-md-6 d-md-flex align-items-md-stretch" style={{ textAlign: 'center' }}>
+                  <div
+                    className="col-md-6 d-md-flex align-items-md-stretch"
+                    style={{ textAlign: "center" }}
+                  >
                     <div className="count-box">
                       <i className="bi bi-journal-richtext"></i>
                       <span
@@ -192,17 +200,137 @@ const NewHome = () => {
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </section>
+
       <br />
+
       <div>
         <Footer />
       </div>
     </div>
   );
 };
+
+/** ✅ Contact form component (emails info@tecstik.com via a server endpoint) */
+function HomeContactForm() {
+  const [name, setName] = useState("");
+  const [fromEmail, setFromEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState({ type: "", text: "" });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    // simple client-side validation
+    if (!name.trim() || !fromEmail.trim() || !message.trim()) {
+      setStatus({ type: "error", text: "Please fill in all fields." });
+      return;
+    }
+
+    setSending(true);
+    setStatus({ type: "", text: "" });
+
+    try {
+      // IMPORTANT:
+      // This URL must point to your PHP endpoint on the same domain.
+      // Example after you upload the PHP file: https://tecstik.com/api/contact.php
+      const res = await fetch("/api/contact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email: fromEmail,
+          message,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || "Failed to send message.");
+      }
+
+      setStatus({ type: "success", text: "Message sent! We’ll get back to you soon." });
+      setName("");
+      setFromEmail("");
+      setMessage("");
+    } catch (err) {
+      console.error(err);
+      setStatus({
+        type: "error",
+        text:
+          "Could not send your message. Please try again or email info@tecstik.com directly.",
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <div className="ts-home-contact">
+      <h3 className="ts-home-contact-title">Contact TecStik</h3>
+      <p className="ts-home-contact-sub">
+        Send a message to <strong>info@tecstik.com</strong>
+      </p>
+
+      <form className="ts-home-contact-form" onSubmit={onSubmit}>
+        <label className="ts-home-label">
+          Your Name
+          <input
+            className="ts-home-input"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g, John Appleseed"
+          />
+        </label>
+
+        <label className="ts-home-label">
+          Your Email
+          <input
+            className="ts-home-input"
+            type="email"
+            value={fromEmail}
+            onChange={(e) => setFromEmail(e.target.value)}
+            placeholder="e.g, you@example.com"
+          />
+        </label>
+
+        <label className="ts-home-label">
+          Message
+          <textarea
+            className="ts-home-textarea"
+            rows={5}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Describe what you need help with…"
+          />
+        </label>
+
+        <button className="ts-home-submit" type="submit" disabled={sending}>
+          {sending ? "Sending..." : "Send Message"}
+        </button>
+
+        {status.text ? (
+          <div className={`ts-home-status ${status.type}`}>{status.text}</div>
+        ) : null}
+
+        {/* fallback mailto link (optional) */}
+        <div className="ts-home-mailto">
+          Prefer email?{" "}
+          <a href="mailto:info@tecstik.com" rel="noreferrer">
+            info@tecstik.com
+          </a>
+        </div>
+      </form>
+    </div>
+  );
+}
 
 export default NewHome;

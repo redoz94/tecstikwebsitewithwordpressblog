@@ -85,7 +85,7 @@ const Contact = () => {
         {/* <img src={ContactImg} alt="logo" class="background-image" /> */}
         <div class="overlay"></div>
         <div class="banner-text">
-          Let's Talk about Fintech
+          Contact Us
         </div>
       </section>
 
@@ -126,7 +126,7 @@ const Contact = () => {
               <div className="info-box  mb-4">
                 <i className="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
-                <p> +92-21 32442392-93</p>
+                <p> +92-21 33541438</p>
               </div>
             </div>
           </div>
