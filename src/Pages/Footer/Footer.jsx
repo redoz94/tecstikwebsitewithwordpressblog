@@ -138,7 +138,7 @@ export default function Footer() {
                   </a>
                 </p>
                 <p>
-                  <i className="fas fa-phone mr-3"></i> +92-021 33541438 
+                  <i className="fas fa-phone mr-3"></i> +92-21 33541438 
                 </p>
                 <Link to="/#" className="text-white">
                   Privacy Policy

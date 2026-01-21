@@ -274,8 +274,7 @@
   align-items: start;
 }
 
-.ts-blogpost-share h3,
-.ts-blogpost-toc h3 {
+.ts-blogpost-share h3 {
   margin: 0 0 10px 0;
   font-size: 28px;
   letter-spacing: 1px;
@@ -321,34 +320,16 @@
   height: auto;
 }
 
-.ts-blogpost-tocList {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0 0;
-}
 
-.ts-blogpost-tocLink {
-  border: none;
-  background: transparent;
-  padding: 6px 0;
-  cursor: pointer;
-  text-align: left;
-  color: #1a5fb4;
-  font-weight: 600;
-}
+
+
 
 .ts-toc-3 {
   margin-left: 14px;
   opacity: 0.95;
 }
 
-.ts-blogpost-tocEmpty {
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 10px;
-  background: #f5f7fb;
-  opacity: 0.9;
-}
+
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -362,3 +343,131 @@
     justify-content: center;
   }
 }
+
+/* ===== Sticky TOC (right column) ===== */
+
+/* Make sure the grid allows sticky children */
+.ts-blogpost-grid {
+  align-items: start;
+}
+
+/* The TOC column sticks */
+
+
+/* If you want TOC to remain RIGHT on tablets too, move the breakpoint lower.
+   Your current CSS collapses columns at 1024px which puts TOC under content. */
+@media (max-width: 860px) {
+  .ts-blogpost-grid {
+    grid-template-columns: 1fr;
+  }
+
+ /* =========================
+   STICKY TOC (RIGHT COLUMN) - FINAL
+   Paste this at the VERY BOTTOM of Blog.css
+   Then delete any other .ts-blogpost-toc blocks above to avoid overrides
+   ========================= */
+
+/* TOC "CARD" LOOK (this applies on desktop AND mobile) */
+
+
+
+
+
+@media (max-width: 1024px) {
+  .ts-blogpost-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ts-blogpost-toc {
+    position: static;  /* on small screens, sticky sidebars are annoying */
+    max-height: none;
+    overflow: visible;
+    margin-top: 18px;
+  }
+}
+
+}
+/* =========================
+   TOC CARD – STRONG VISUAL STYLE
+   ========================= */
+
+.ts-blogpost-toc {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+
+  background: #f9fafc;                 /* slightly off-white so it stands out */
+  border: 1px solid #dfe3ea;           /* visible border */
+  border-radius: 14px;
+
+  box-shadow: 
+    0 6px 16px rgba(0,0,0,0.12),
+    0 2px 6px rgba(0,0,0,0.08);         /* layered shadow for clarity */
+
+  padding: 20px 22px;
+
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+
+  z-index: 5;                          /* ensures it sits above content */
+}
+
+.ts-blogpost-toc:hover {
+  box-shadow: 
+    0 10px 28px rgba(0,0,0,0.16),
+    0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* Title */
+.ts-blogpost-toc h3 {
+  margin: 0 0 14px 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a1a;
+  border-bottom: 2px solid #e3e8ef;
+  padding-bottom: 8px;
+}
+
+/* TOC items */
+.ts-blogpost-tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ts-blogpost-tocList li {
+  margin-bottom: 8px;
+}
+
+.ts-blogpost-tocLink {
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a5fb4;
+  cursor: pointer;
+}
+
+.ts-blogpost-tocLink:hover {
+  text-decoration: underline;
+}
+
+/* H3 indentation */
+.ts-toc-3 {
+  margin-left: 16px;
+  opacity: 0.9;
+}
+
+/* Mobile behavior */
+@media (max-width: 1024px) {
+  .ts-blogpost-toc {
+    position: static;
+    max-height: none;
+    margin-top: 24px;
+  }
+}
+
+

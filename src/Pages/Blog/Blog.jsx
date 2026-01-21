@@ -4,6 +4,9 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Blog.css";
 
+// ✅ Import your hero image from src
+import blogHero from "../images/Blog.png";
+
 // WordPress REST base
 const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
 
@@ -26,8 +29,8 @@ export default function Blog() {
   const [query, setQuery] = useState("");
 
   // ✅ Fixed hero image for BLOG DIRECTORY ONLY (NOT from WP featured images)
-  // Put this image in: /public/assets/img/blog-hero.jpg  (or change the path here)
-  const BLOG_DIRECTORY_HERO = "/assets/img/blog-hero.jpg";
+  // Use imported src image:
+  const BLOG_DIRECTORY_HERO = blogHero;
 
   useEffect(() => {
     let cancelled = false;
@@ -37,7 +40,6 @@ export default function Blog() {
       setErr("");
 
       try {
-        // latest posts + featured images + author
         const url = `${WP_BASE}/posts?per_page=50&_embed=1`;
         const res = await fetch(url);
 
@@ -58,7 +60,6 @@ export default function Blog() {
     };
 
     run();
-
     return () => {
       cancelled = true;
     };
@@ -79,10 +80,15 @@ export default function Blog() {
     <div className="ts-blogdir">
       <Header />
 
-      {/* HERO (fixed image only - does NOT change per blog) */}
+      {/* ✅ HERO (static image behind "Blog") */}
       <section
         className="ts-blogdir-hero"
-        style={{ backgroundImage: `url(${BLOG_DIRECTORY_HERO})` }}
+        style={{
+          backgroundImage: `url(${BLOG_DIRECTORY_HERO})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
         <div className="ts-blogdir-hero-overlay" />
         <div className="ts-blogdir-hero-inner">
@@ -115,22 +121,16 @@ export default function Blog() {
       {/* CARDS */}
       <section className="ts-blogdir-gridwrap">
         {loading ? <p className="ts-blogdir-status">Loading…</p> : null}
-        {err ? (
-          <p className="ts-blogdir-status ts-blogdir-error">{err}</p>
-        ) : null}
+        {err ? <p className="ts-blogdir-status ts-blogdir-error">{err}</p> : null}
 
         {!loading && !err ? (
           <div className="ts-blogdir-grid">
             {filtered.map((post) => {
               const img = getFeaturedImage(post);
               const title = stripHtml(post?.title?.rendered || "");
-              const excerpt = stripHtml(post?.excerpt?.rendered || "").slice(
-                0,
-                220
-              );
+              const excerpt = stripHtml(post?.excerpt?.rendered || "").slice(0, 220);
               const slug = post?.slug;
 
-              // Safety: if slug is missing, don’t break routing
               const to = slug ? `/TecStik-Blog/${slug}` : "/TecStik-Blog";
 
               return (
@@ -139,9 +139,6 @@ export default function Blog() {
                   to={to}
                   className="ts-blogdir-card"
                   aria-label={slug ? `Read: ${title}` : "Blog"}
-                  // If you want ALWAYS open in new tab, uncomment next 2 lines:
-                  // target="_blank"
-                  // rel="noreferrer"
                 >
                   <div className="ts-blogdir-cardimg">
                     {img ? (

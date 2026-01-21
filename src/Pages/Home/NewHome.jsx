@@ -276,7 +276,7 @@ function HomeContactForm() {
     <div className="ts-home-contact">
       <h3 className="ts-home-contact-title">Contact TecStik</h3>
       <p className="ts-home-contact-sub">
-        Send a message to <strong>info@tecstik.com</strong>
+        Send a message to <strong>TecStik</strong>
       </p>
 
       <form className="ts-home-contact-form" onSubmit={onSubmit}>

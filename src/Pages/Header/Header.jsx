@@ -87,6 +87,7 @@ export default function Header() {
     if (window.innerWidth >= 992) setExpertiseOpen(true);
   }}
   onMouseLeave={() => {
+    
     if (window.innerWidth >= 992) setExpertiseOpen(false);
   }}>
         <button
