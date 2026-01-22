@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NewHome from "./Pages/Home/NewHome";
 import About from "./Pages/About/About";
 import Portfolio from "./Pages/Portfolio/Portfolio";
-import Privacy from "./Pages/Privacy/Privacy";
-
+import PrivacyPolicy from "./Pages/Privacy/Privacy";
 import Blockchain from "./Pages/Services/Blockchain/Blockchain.jsx";
 import WebAndMobile from "./Pages/Services/WebAndMobile/WebAndMobile.jsx";
 import MobileApp from "./Pages/Services/MobileApp/MobileApp.jsx";
@@ -27,7 +26,7 @@ export default function App() {
 
         <Route path="/Tecstik-Meet" element={<About />} />
         <Route path="/TecStik-Portfolio" element={<Portfolio />} />
-        <Route path="/TecStik-Privacy" element={<Privacy />} />
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         <Route path="/TecStik-Blockchain" element={<Blockchain />} />
         <Route path="/TecStik-WebDevelopment" element={<WebAndMobile />} />

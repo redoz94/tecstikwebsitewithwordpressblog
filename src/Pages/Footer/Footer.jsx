@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import privacyPdf from "./PrivacyPolicy.pdf";
 import { Link } from "react-router-dom";
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 
 export default function Footer() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -140,9 +143,10 @@ export default function Footer() {
                 <p>
                   <i className="fas fa-phone mr-3"></i> +92-21 33541438 
                 </p>
-                <Link to="/#" className="text-white">
-                  Privacy Policy
-                </Link>
+                <a href={privacyPdf} target="_blank" rel="noopener noreferrer">
+  Privacy Policy
+</a>
+
               </div>
             </div>
           </div>

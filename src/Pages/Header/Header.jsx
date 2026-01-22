@@ -5,15 +5,36 @@ import tecStikLogo from "../images/tecStikLogo.png";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false); // mobile drawer
-  const [expertiseOpen, setExpertiseOpen] = useState(false); // desktop + mobile dropdown
+  const [expertiseOpen, setExpertiseOpen] = useState(false); // dropdown
   const [scrolled, setScrolled] = useState(false);
 
   const expertiseRef = useRef(null);
   const drawerRef = useRef(null);
 
+  // ✅ delay timer so dropdown doesn't close while moving mouse
+  const closeTimerRef = useRef(null);
+
+  const isDesktop = () => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth >= 992;
+  };
+
   const closeAll = () => {
     setMenuOpen(false);
     setExpertiseOpen(false);
+  };
+
+  const openExpertise = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setExpertiseOpen(true);
+  };
+
+  const closeExpertiseDelayed = () => {
+    if (!isDesktop()) return;
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setExpertiseOpen(false);
+    }, 200);
   };
 
   // Sticky shadow
@@ -26,7 +47,7 @@ export default function Header() {
   // Close menus on resize to desktop
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 992) {
+      if (typeof window !== "undefined" && window.innerWidth >= 992) {
         setMenuOpen(false);
       }
     };
@@ -54,7 +75,7 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Optional: prevent body scroll when drawer open
+  // Prevent body scroll when drawer open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -62,11 +83,22 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  // Common nav items (so desktop/mobile always match)
+  // Cleanup timer
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  // Common nav items (desktop + mobile)
   const NavItems = ({ onNavigate }) => (
     <>
       <li>
-        <NavLink to="/" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Home
         </NavLink>
       </li>
@@ -81,33 +113,47 @@ export default function Header() {
         </NavLink>
       </li>
 
-      {/* EXPERTISE */}
-      <li ref={expertiseRef} className={`ts-dropdown ${expertiseOpen ? "open" : ""}`}
-      onMouseEnter={() => {
-    if (window.innerWidth >= 992) setExpertiseOpen(true);
-  }}
-  onMouseLeave={() => {
-    
-    if (window.innerWidth >= 992) setExpertiseOpen(false);
-  }}>
+      {/* ✅ EXPERTISE (hover stays open + delay) */}
+      <li
+        ref={expertiseRef}
+        className={`ts-dropdown ${expertiseOpen ? "open" : ""}`}
+        onMouseEnter={() => {
+          if (isDesktop()) openExpertise();
+        }}
+        onMouseLeave={() => {
+          if (isDesktop()) closeExpertiseDelayed();
+        }}
+      >
         <button
           type="button"
           className="ts-dropdown-trigger"
-          onClick={() => setExpertiseOpen((v) => !v)}
+          onClick={() => {
+            // Only click-toggle on mobile
+            if (!isDesktop()) setExpertiseOpen((v) => !v);
+          }}
           aria-haspopup="menu"
           aria-expanded={expertiseOpen}
         >
           Our Expertise <span className="ts-caret" aria-hidden="true">▾</span>
         </button>
 
-        <div className="ts-dropdown-menu" role="menu" aria-label="Our Expertise">
+        <div
+          className="ts-dropdown-menu"
+          role="menu"
+          aria-label="Our Expertise"
+          onMouseEnter={() => {
+            if (isDesktop()) openExpertise();
+          }}
+          onMouseLeave={() => {
+            if (isDesktop()) closeExpertiseDelayed();
+          }}
+        >
           <NavLink
-            to="/TecStik-Blockchain"
+            to="../Pages/Services/Blockchain/Blockchain.jsx"
             onClick={() => {
               setExpertiseOpen(false);
-              onNavigate?.();
+              if (onNavigate) onNavigate();
             }}
-            className={({ isActive }) => (isActive ? "is-active" : "")}
             role="menuitem"
           >
             Blockchain
@@ -117,9 +163,8 @@ export default function Header() {
             to="/TecStik-WebDevelopment"
             onClick={() => {
               setExpertiseOpen(false);
-              onNavigate?.();
+              if (onNavigate) onNavigate();
             }}
-            className={({ isActive }) => (isActive ? "is-active" : "")}
             role="menuitem"
           >
             Web Development
@@ -129,9 +174,8 @@ export default function Header() {
             to="/TecStik-MobileApp"
             onClick={() => {
               setExpertiseOpen(false);
-              onNavigate?.();
+              if (onNavigate) onNavigate();
             }}
-            className={({ isActive }) => (isActive ? "is-active" : "")}
             role="menuitem"
           >
             Mobile Apps
@@ -141,9 +185,8 @@ export default function Header() {
             to="/TecStik-Cloud"
             onClick={() => {
               setExpertiseOpen(false);
-              onNavigate?.();
+              if (onNavigate) onNavigate();
             }}
-            className={({ isActive }) => (isActive ? "is-active" : "")}
             role="menuitem"
           >
             Cloud
@@ -211,14 +254,14 @@ export default function Header() {
           <img src={tecStikLogo} className="ts-logo" alt="TecStik" />
         </Link>
 
-        {/* DESKTOP NAV (shows >= 992px) */}
+        {/* DESKTOP NAV */}
         <nav className="ts-desktop-nav" aria-label="Primary">
           <ul className="ts-desktop-list">
-            <NavItems onNavigate={() => { /* desktop: no drawer */ }} />
+            <NavItems onNavigate={null} />
           </ul>
         </nav>
 
-        {/* BURGER (shows < 992px) */}
+        {/* BURGER */}
         <button
           className={`ts-burger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen((v) => !v)}
@@ -232,12 +275,8 @@ export default function Header() {
           <span />
         </button>
 
-        {/* OVERLAY (animate + click to close) */}
-        <div
-          className={`ts-overlay ${menuOpen ? "open" : ""}`}
-          onClick={closeAll}
-          aria-hidden={!menuOpen}
-        />
+        {/* OVERLAY */}
+        <div className={`ts-overlay ${menuOpen ? "open" : ""}`} onClick={closeAll} aria-hidden={!menuOpen} />
 
         {/* MOBILE DRAWER */}
         <nav
