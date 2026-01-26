@@ -224,53 +224,51 @@ function HomeContactForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState({ type: "", text: "" });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+const onSubmit = (e) => {
+  e.preventDefault();
 
-    // simple client-side validation
-    if (!name.trim() || !fromEmail.trim() || !message.trim()) {
-      setStatus({ type: "error", text: "Please fill in all fields." });
-      return;
-    }
+  // simple client-side validation
+  if (!name.trim() || !fromEmail.trim() || !message.trim()) {
+    setStatus({ type: "error", text: "Please fill in all fields." });
+    return;
+  }
 
-    setSending(true);
-    setStatus({ type: "", text: "" });
+  setSending(true);
+  setStatus({ type: "", text: "" });
 
-    try {
-      // IMPORTANT:
-      // This URL must point to your PHP endpoint on the same domain.
-      // Example after you upload the PHP file: https://tecstik.com/api/contact.php
-      const res = await fetch("/api/contact.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email: fromEmail,
-          message,
-        }),
-      });
+  const to = "info@tecstik.com";
 
-      const data = await res.json().catch(() => ({}));
+  // You can keep this fixed (no UI changes), or tweak the text if you want
+  const subject = "New message from TecStik website";
 
-      if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || "Failed to send message.");
-      }
+  // Required body format
+  const body = [
+    `Name: ${name.trim()}`,
+    `Email: ${fromEmail.trim()}`,
+    "",
+    "What do you want to build together?",
+    message.trim(),
+    "",
+  ].join("\n");
 
-      setStatus({ type: "success", text: "Message sent! We’ll get back to you soon." });
-      setName("");
-      setFromEmail("");
-      setMessage("");
-    } catch (err) {
-      console.error(err);
-      setStatus({
-        type: "error",
-        text:
-          "Could not send your message. Please try again or email info@tecstik.com directly.",
-      });
-    } finally {
-      setSending(false);
-    }
-  };
+  const mailtoHref = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  // Open the user's email client
+  window.location.href = mailtoHref;
+
+  // Optional: show a friendly status message (uses your existing UI)
+  setStatus({ type: "success", text: "Opening your email app…" });
+
+  // Reset fields (optional; matches your previous reset behavior)
+  setName("");
+  setFromEmail("");
+  setMessage("");
+
+  // Restore button state
+  setSending(false);
+};
 
   return (
     <div className="ts-home-contact">

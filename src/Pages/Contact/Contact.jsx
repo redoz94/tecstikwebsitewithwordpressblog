@@ -4,11 +4,11 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./Contact.css";
 import map from "../images/map.PNG";
-import axios from "axios";
+// import axios from "axios"; // ✅ no longer needed for mailto
 import { ToastContainer, toast } from "react-toastify";
 import { Spin } from "antd";
 
-const CONTACT_API = "https://sign-api-boiler-plate.vercel.app/tecstikSndmail";
+// const CONTACT_API = "https://sign-api-boiler-plate.vercel.app/tecstikSndmail"; // ✅ no longer needed
 
 const Contact = () => {
   // keep your existing loading behavior (true = show button, false = show spinner)
@@ -29,7 +29,7 @@ const Contact = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [searchParams]);
 
-  async function SndEmail(event) {
+  function SndEmail(event) {
     event.preventDefault();
 
     const userName = firstname.current?.value?.trim();
@@ -42,43 +42,48 @@ const Contact = () => {
       return;
     }
 
+    // show spinner briefly (same UI pattern)
     setLoading(false);
 
-    const payload = {
-      userName,
-      userSubject,
-      userMessage: `Message from: ${userEmail}\n\n${userText}`,
-    };
+    const to = "info@tecstik.com";
 
-    try {
-      const res = await axios.post(CONTACT_API, payload, {
-        headers: { "Content-Type": "application/json" },
-      });
+    // Build prefilled email body (plain text)
+    const bodyLines = [
+      "New message from TecStik website contact form:",
+      "",
+      `Name: ${userName}`,
+      `Email: ${userEmail}`,
+      "",
+      "Message:",
+      userText,
+      "",
+    ];
 
-      // If server returns success
-      console.log("Mail API response:", res.data);
+    const subject = userSubject;
+    const body = bodyLines.join("\n");
 
-      toast.success("✅ Message sent successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        theme: "light",
-      });
+    // IMPORTANT: Use encodeURIComponent to prevent breaking the mailto URL
+    const mailtoHref = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
 
-      // reset form
-      if (firstname.current) firstname.current.value = "";
-      if (firstEmail.current) firstEmail.current.value = "";
-      if (firstSubject.current) firstSubject.current.value = "";
-      if (firstMessage.current) firstMessage.current.value = "";
-    } catch (err) {
-      console.log("Mail API error:", err);
+    // Open the user's email client
+    window.location.href = mailtoHref;
 
-      // Most likely CORS until backend is fixed
-      toast.error(
-        "❌ Message failed to send. Your email endpoint is blocking the browser request (CORS). Fix backend CORS and try again."
-      );
-    } finally {
-      setLoading(true);
-    }
+    toast.info("Opening your email app…", {
+      position: "top-right",
+      autoClose: 2500,
+      theme: "light",
+    });
+
+    // Optional: reset form fields (kept similar to your previous reset)
+    if (firstname.current) firstname.current.value = "";
+    if (firstEmail.current) firstEmail.current.value = "";
+    if (firstSubject.current) firstSubject.current.value = "";
+    if (firstMessage.current) firstMessage.current.value = "";
+
+    // Restore button
+    setLoading(true);
   }
 
   return (
@@ -202,7 +207,7 @@ const Contact = () => {
                     className="form-control"
                     name="message"
                     rows="5"
-                    placeholder="Message"
+                    placeholder="How can we help you today?"
                     required
                     ref={firstMessage}
                   ></textarea>
@@ -219,7 +224,7 @@ const Contact = () => {
                 </div>
               </form>
 
-              {/* Optional fallback if CORS keeps failing:
+              {/* Optional fallback:
                   <p style={{ marginTop: 10 }}>
                     If the form doesn’t work, email us directly:{" "}
                     <a href="mailto:info@tecstik.com">info@tecstik.com</a>
