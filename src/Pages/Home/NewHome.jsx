@@ -320,12 +320,7 @@ const onSubmit = (e) => {
         ) : null}
 
         {/* fallback mailto link (optional) */}
-        <div className="ts-home-mailto">
-          Prefer email?{" "}
-          <a href="mailto:info@tecstik.com" rel="noreferrer">
-            info@tecstik.com
-          </a>
-        </div>
+        
       </form>
     </div>
   );

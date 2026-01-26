@@ -26,43 +26,64 @@ const Careers = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  function SndEmail(event) {
-    event.preventDefault();
-    setLoading(false);
+function SndEmail(event) {
+  event.preventDefault();
 
-    const userName = firstname.current.value;
-    const userSubject = firstSubject.current.value;
-    const userMessage = `message from this ${firstEmail.current.value} ${firstMessage.current.value}`;
+  const userName = firstname.current?.value?.trim();
+  const userEmail = firstEmail.current?.value?.trim();
+  const userPosition = firstSubject.current?.value?.trim(); // "Position Applied for"
+  const userCoverLetter = firstMessage.current?.value?.trim(); // "Cover Letter+Resumé"
 
-    axios({
-      method: "post",
-      url: "https://sign-api-boiler-plate.vercel.app/tecstikSndmail",
-      data: {
-        userName,
-        userSubject,
-        userMessage,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        toast.success("✅ Successfully submitted!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        setLoading(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("❌ Something went wrong. Please try again.");
-        setLoading(true);
-      });
+  if (!userName || !userEmail || !userPosition || !userCoverLetter) {
+    toast.error("Please fill in all fields.");
+    return;
   }
+
+  setLoading(false);
+
+  const to = "info@tecstik.com";
+
+  // Subject line for the drafted email (keep simple + readable)
+  const subject = `Career Application: ${userPosition}`;
+
+  // Body with placeholders as subheadings
+  const bodyLines = [
+    "Your Name",
+    userName,
+    "",
+    "Your Email",
+    userEmail,
+    "",
+    "Position Applied for",
+    userPosition,
+    "",
+    "Cover Letter+Resumé",
+    userCoverLetter,
+    "",
+  ];
+
+  const body = bodyLines.join("\n");
+
+  const mailtoHref = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailtoHref;
+
+  toast.info("Opening your email app…", {
+    position: "top-right",
+    autoClose: 2500,
+    theme: "light",
+  });
+
+  // reset fields
+  if (firstname.current) firstname.current.value = "";
+  if (firstEmail.current) firstEmail.current.value = "";
+  if (firstSubject.current) firstSubject.current.value = "";
+  if (firstMessage.current) firstMessage.current.value = "";
+
+  setLoading(true);
+}
 
   const [searchParams] = useSearchParams();
 
@@ -96,7 +117,7 @@ const Careers = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 text_center">
-              <h3 className="margin">Join The Journey of Innovative Fintech Innovation</h3>
+              <h3 className="margin">Join The Journey to Innovative Efficiency</h3>
 
               <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
@@ -232,7 +253,7 @@ const Careers = () => {
                     className="form-control"
                     name="subject"
                     id="subject"
-                    placeholder="Subject"
+                    placeholder="Position Applied for"
                     required
                     ref={firstSubject}
                   />
@@ -243,7 +264,7 @@ const Careers = () => {
                     className="form-control"
                     name="message"
                     rows="5"
-                    placeholder="Message"
+                    placeholder="Cover Letter+Resumé"
                     required
                     ref={firstMessage}
                   ></textarea>
