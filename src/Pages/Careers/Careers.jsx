@@ -60,6 +60,8 @@ function SndEmail(event) {
     "Cover Letter+Resumé",
     userCoverLetter,
     "",
+    "Please attach your résumé file to this email before sending.",
+  "",
   ];
 
   const body = bodyLines.join("\n");
