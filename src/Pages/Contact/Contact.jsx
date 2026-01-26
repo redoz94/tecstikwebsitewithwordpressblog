@@ -6,89 +6,92 @@ import "./Contact.css";
 import map from "../images/map.PNG";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { message, Spin } from "antd";
-import ContactImg from "./ContactUS.jpg";
+import { Spin } from "antd";
+
+const CONTACT_API = "https://sign-api-boiler-plate.vercel.app/tecstikSndmail";
 
 const Contact = () => {
-  const [loading, setloading] = useState(true);
+  // keep your existing loading behavior (true = show button, false = show spinner)
+  const [loading, setLoading] = useState(true);
+
+  const firstname = useRef(null);
+  const firstEmail = useRef(null);
+  const firstSubject = useRef(null);
+  const firstMessage = useRef(null);
+
   function maplink() {
     window.open("https://goo.gl/maps/GX3euzu28RpAkaPy6", "_blank");
   }
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentTab = searchParams.get("tab") || "0";
-
-  const changeTab = (tab) => {
-    searchParams.set("tab", tab);
-    setSearchParams(searchParams);
-  };
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [searchParams]);
 
-  //   function emailSnd(doc) {
-
-  // }
-  let firstname = useRef();
-  let firstEmail = useRef();
-  let firstSubject = useRef();
-  let firstMessage = useRef();
-
-  function SndEmail(event) {
+  async function SndEmail(event) {
     event.preventDefault();
-    setloading(false);
 
-    let userName = firstname.current.value;
-    // let userEmail = firstEmail.current.value;
-    let userSubject = firstSubject.current.value;
-    let userMessage = `message from this ${firstEmail.current.value} ${firstMessage.current.value}`;
+    const userName = firstname.current?.value?.trim();
+    const userEmail = firstEmail.current?.value?.trim();
+    const userSubject = firstSubject.current?.value?.trim();
+    const userText = firstMessage.current?.value?.trim();
 
-    axios({
-      method: "post",
-      url: "https://sign-api-boiler-plate.vercel.app/tecstikSndmail",
-      data: {
-        userName: userName,
-        userSubject: userSubject,
-        userMessage: userMessage,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        toast.success("🦄 Successfully Submit mail!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        setloading(true);
-      })
-      .catch((err) => {
-        console.log(err);
+    if (!userName || !userEmail || !userSubject || !userText) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
+    setLoading(false);
+
+    const payload = {
+      userName,
+      userSubject,
+      userMessage: `Message from: ${userEmail}\n\n${userText}`,
+    };
+
+    try {
+      const res = await axios.post(CONTACT_API, payload, {
+        headers: { "Content-Type": "application/json" },
       });
+
+      // If server returns success
+      console.log("Mail API response:", res.data);
+
+      toast.success("✅ Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+      });
+
+      // reset form
+      if (firstname.current) firstname.current.value = "";
+      if (firstEmail.current) firstEmail.current.value = "";
+      if (firstSubject.current) firstSubject.current.value = "";
+      if (firstMessage.current) firstMessage.current.value = "";
+    } catch (err) {
+      console.log("Mail API error:", err);
+
+      // Most likely CORS until backend is fixed
+      toast.error(
+        "❌ Message failed to send. Your email endpoint is blocking the browser request (CORS). Fix backend CORS and try again."
+      );
+    } finally {
+      setLoading(true);
+    }
   }
 
   return (
     <div>
       <Header />
       <ToastContainer />
+
       <section className="banner_container">
         <div id="banner_6_image"></div>
-        {/* <img src={ContactImg} alt="logo" class="background-image" /> */}
-        <div class="overlay"></div>
-        <div class="banner-text">
-          Contact Us
-        </div>
-      </section>
 
+        <div className="overlay"></div>
+        <div className="banner-text">Contact Us</div>
+      </section>
 
       <br />
       <br />
@@ -103,7 +106,7 @@ const Contact = () => {
               <div className="mb-3n">
                 <h3>Send Us an Email</h3>
                 <p>
-                  <a href="mailto:info@tecstik.com" class="text-black">
+                  <a href="mailto:info@tecstik.com" className="text-black">
                     info@tecstik.com
                   </a>{" "}
                 </p>
@@ -111,11 +114,11 @@ const Contact = () => {
             </div>
 
             <div className="col-lg-3 col-md-6">
-              <div className="info-box  mb-4">
+              <div className="info-box mb-4">
                 <i className="bx bx-envelope"></i>
                 <h3>Send Us an Email</h3>
                 <p>
-                  <a href="mailto:info@tecstik.com" class="text-black">
+                  <a href="mailto:info@tecstik.com" className="text-black">
                     info@tecstik.com
                   </a>{" "}
                 </p>
@@ -123,7 +126,7 @@ const Contact = () => {
             </div>
 
             <div className="col-lg-3 col-md-6">
-              <div className="info-box  mb-4">
+              <div className="info-box mb-4">
                 <i className="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
                 <p> +92-21 33541438</p>
@@ -137,11 +140,11 @@ const Contact = () => {
                 title="myFrame"
                 src={map}
                 id="locationMap"
-                // height="200"
                 className="mb-4 mb-lg-0"
-                referrerpolicy="no-referrer-when-downgrade"
-                frameborder="0"
+                referrerPolicy="no-referrer-when-downgrade"
+                frameBorder="0"
                 onClick={maplink}
+                alt="TecStik location map"
               />
               <br />
               <br />
@@ -156,7 +159,7 @@ const Contact = () => {
             </div>
 
             <div className="col-lg-6">
-              <form onSubmit={SndEmail} role="form" class="email-form">
+              <form onSubmit={SndEmail} role="form" className="email-form">
                 <div className="row">
                   <div className="col-md-6 form-group">
                     <input
@@ -181,6 +184,7 @@ const Contact = () => {
                     />
                   </div>
                 </div>
+
                 <div className="form-group mt-3">
                   <input
                     type="text"
@@ -192,6 +196,7 @@ const Contact = () => {
                     ref={firstSubject}
                   />
                 </div>
+
                 <div className="form-group mt-3">
                   <textarea
                     className="form-control"
@@ -202,16 +207,10 @@ const Contact = () => {
                     ref={firstMessage}
                   ></textarea>
                 </div>
-                <div className="my-3">
-                  <div className="loading">Loading</div>
-                  <div className="error-message"></div>
-                  <div className="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
-                <div className="text-center">
+
+                <div className="text-center" style={{ marginTop: 18 }}>
                   {loading ? (
-                    <button type="submit" class="btn btn-secondary">
+                    <button type="submit" className="btn btn-secondary">
                       Send Message
                     </button>
                   ) : (
@@ -219,12 +218,21 @@ const Contact = () => {
                   )}
                 </div>
               </form>
+
+              {/* Optional fallback if CORS keeps failing:
+                  <p style={{ marginTop: 10 }}>
+                    If the form doesn’t work, email us directly:{" "}
+                    <a href="mailto:info@tecstik.com">info@tecstik.com</a>
+                  </p>
+              */}
             </div>
           </div>
         </div>
       </div>
+
       <br />
       <br />
+
       <div>
         <Footer />
       </div>

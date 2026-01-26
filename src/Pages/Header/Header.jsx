@@ -1,23 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import tecStikLogo from "../images/tecStikLogo.png";
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false); // mobile drawer
-  const [expertiseOpen, setExpertiseOpen] = useState(false); // dropdown
+  const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [expertiseOpen, setExpertiseOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const expertiseRef = useRef(null);
   const drawerRef = useRef(null);
-
-  // ✅ delay timer so dropdown doesn't close while moving mouse
   const closeTimerRef = useRef(null);
 
-  const isDesktop = () => {
-    if (typeof window === "undefined") return false;
-    return window.innerWidth >= 992;
-  };
+  const isDesktop = () =>
+    typeof window !== "undefined" ? window.innerWidth >= 992 : false;
 
   const closeAll = () => {
     setMenuOpen(false);
@@ -32,19 +30,22 @@ export default function Header() {
   const closeExpertiseDelayed = () => {
     if (!isDesktop()) return;
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    closeTimerRef.current = setTimeout(() => {
-      setExpertiseOpen(false);
-    }, 200);
+    closeTimerRef.current = setTimeout(() => setExpertiseOpen(false), 220);
   };
 
-  // Sticky shadow
+  const go = (path, onNavigate) => {
+    setExpertiseOpen(false);
+    setMenuOpen(false);
+    if (onNavigate) onNavigate();
+    navigate(path);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menus on resize to desktop
   useEffect(() => {
     const onResize = () => {
       if (typeof window !== "undefined" && window.innerWidth >= 992) {
@@ -55,7 +56,6 @@ export default function Header() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (expertiseRef.current && !expertiseRef.current.contains(e.target)) {
@@ -66,7 +66,6 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ESC closes drawer + dropdown
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === "Escape") closeAll();
@@ -75,7 +74,6 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Prevent body scroll when drawer open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -83,52 +81,37 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  // Cleanup timer
   useEffect(() => {
     return () => {
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
 
-  // Common nav items (desktop + mobile)
   const NavItems = ({ onNavigate }) => (
     <>
       <li>
-        <NavLink
-          to="/"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Home
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          to="/Tecstik-Meet"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/Tecstik-Meet" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Meet TecStik
         </NavLink>
       </li>
 
-      {/* ✅ EXPERTISE (hover stays open + delay) */}
+      {/* EXPERTISE */}
       <li
         ref={expertiseRef}
         className={`ts-dropdown ${expertiseOpen ? "open" : ""}`}
-        onMouseEnter={() => {
-          if (isDesktop()) openExpertise();
-        }}
-        onMouseLeave={() => {
-          if (isDesktop()) closeExpertiseDelayed();
-        }}
+        onMouseEnter={() => isDesktop() && openExpertise()}
+        onMouseLeave={() => isDesktop() && closeExpertiseDelayed()}
       >
         <button
           type="button"
           className="ts-dropdown-trigger"
           onClick={() => {
-            // Only click-toggle on mobile
             if (!isDesktop()) setExpertiseOpen((v) => !v);
           }}
           aria-haspopup="menu"
@@ -141,105 +124,54 @@ export default function Header() {
           className="ts-dropdown-menu"
           role="menu"
           aria-label="Our Expertise"
-          onMouseEnter={() => {
-            if (isDesktop()) openExpertise();
-          }}
-          onMouseLeave={() => {
-            if (isDesktop()) closeExpertiseDelayed();
-          }}
+          onMouseEnter={() => isDesktop() && openExpertise()}
+          onMouseLeave={() => isDesktop() && closeExpertiseDelayed()}
+          onMouseDown={(e) => e.stopPropagation()}  /* helps prevent outside-click logic fighting */
         >
-          <NavLink
-            to="../Pages/Services/Blockchain/Blockchain.jsx"
-            onClick={() => {
-              setExpertiseOpen(false);
-              if (onNavigate) onNavigate();
-            }}
-            role="menuitem"
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-Blockchain", onNavigate)}>
             Blockchain
-          </NavLink>
+          </button>
 
-          <NavLink
-            to="/TecStik-WebDevelopment"
-            onClick={() => {
-              setExpertiseOpen(false);
-              if (onNavigate) onNavigate();
-            }}
-            role="menuitem"
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-WebDevelopment", onNavigate)}>
             Web Development
-          </NavLink>
+          </button>
 
-          <NavLink
-            to="/TecStik-MobileApp"
-            onClick={() => {
-              setExpertiseOpen(false);
-              if (onNavigate) onNavigate();
-            }}
-            role="menuitem"
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-MobileApp", onNavigate)}>
             Mobile Apps
-          </NavLink>
+          </button>
 
-          <NavLink
-            to="/TecStik-Cloud"
-            onClick={() => {
-              setExpertiseOpen(false);
-              if (onNavigate) onNavigate();
-            }}
-            role="menuitem"
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-Cloud", onNavigate)}>
             Cloud
-          </NavLink>
+          </button>
         </div>
       </li>
 
       <li>
-        <NavLink
-          to="/TecStik-Product"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/TecStik-Product" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Products
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          to="/TecStik-Portfolio"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/TecStik-Portfolio" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Portfolio
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          to="/TecStik-Blog"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/TecStik-Blog" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Blog
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          to="/TecStik-Careers"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/TecStik-Careers" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Careers
         </NavLink>
       </li>
 
       <li>
-        <NavLink
-          to="/TecStik-Contact"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        <NavLink to="/TecStik-Contact" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
           Contact
         </NavLink>
       </li>
@@ -249,19 +181,16 @@ export default function Header() {
   return (
     <header className={`ts-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="ts-container ts-header-inner">
-        {/* LOGO */}
         <Link to="/" onClick={closeAll} className="ts-brand" aria-label="TecStik Home">
           <img src={tecStikLogo} className="ts-logo" alt="TecStik" />
         </Link>
 
-        {/* DESKTOP NAV */}
         <nav className="ts-desktop-nav" aria-label="Primary">
           <ul className="ts-desktop-list">
             <NavItems onNavigate={null} />
           </ul>
         </nav>
 
-        {/* BURGER */}
         <button
           className={`ts-burger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen((v) => !v)}
@@ -275,10 +204,8 @@ export default function Header() {
           <span />
         </button>
 
-        {/* OVERLAY */}
         <div className={`ts-overlay ${menuOpen ? "open" : ""}`} onClick={closeAll} aria-hidden={!menuOpen} />
 
-        {/* MOBILE DRAWER */}
         <nav
           id="ts-mobile-drawer"
           ref={drawerRef}
@@ -289,7 +216,6 @@ export default function Header() {
         >
           <div className="ts-drawer-header">
             <span className="ts-drawer-title">Menu</span>
-
             <button className="ts-drawer-close" onClick={closeAll} aria-label="Close menu" type="button">
               ✕
             </button>

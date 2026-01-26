@@ -172,7 +172,7 @@ const Careers = () => {
               <div className="info-box mb-4">
                 <i className="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
-                <p>+92-21 32442392-93</p>
+                <p> +92-21 33541438</p>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
 .ts-header {
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 9999;
   background: #f2f2f2; /* light grey like screenshot */
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -75,6 +75,7 @@
 /* ===== Dropdown (Desktop + Mobile) ===== */
 .ts-dropdown {
   position: relative;
+  z-index: 10000;
 }
 
 .ts-dropdown-trigger {
@@ -99,6 +100,9 @@
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
   padding: 10px;
   display: none;
+  position: absolute;
+  z-index: 10001;
+  pointer-events: auto;
 }
 
 .ts-dropdown.open .ts-dropdown-menu {
@@ -304,4 +308,151 @@
   .ts-drawer {
     display: none;
   }
+}
+
+.ts-dropdown .ts-dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ts-dropdown.open .ts-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+/* ===== CRITICAL: overlay must not block clicks when closed ===== */
+.ts-overlay {
+  pointer-events: none;   /* ✅ closed overlay cannot capture clicks */
+  opacity: 0;
+}
+
+.ts-overlay.open {
+  pointer-events: auto;   /* ✅ only open overlay captures clicks */
+  opacity: 1;
+}
+
+/* ===== Keep header & dropdown on top ===== */
+.ts-header {
+  position: sticky; /* keep your existing behavior */
+  top: 0;
+  z-index: 9999;
+}
+
+/* Dropdown container */
+.ts-dropdown {
+  position: relative;
+  z-index: 10000;
+}
+
+/* Dropdown menu must be clickable and on top */
+.ts-dropdown-menu {
+  position: absolute;
+  z-index: 10001;
+  pointer-events: auto;
+}
+
+/* If you hide/show via open class, make sure pointer-events toggles correctly */
+.ts-dropdown .ts-dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ts-dropdown.open .ts-dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+/* ===== CRITICAL: overlay must not block clicks when closed ===== */
+.ts-overlay {
+  pointer-events: none;   /* ✅ closed overlay cannot capture clicks */
+  opacity: 0;
+}
+
+.ts-overlay.open {
+  pointer-events: auto;   /* ✅ only open overlay captures clicks */
+  opacity: 1;
+}
+
+/* ===== Keep header & dropdown on top ===== */
+.ts-header {
+  position: sticky; /* keep your existing behavior */
+  top: 0;
+  z-index: 9999;
+}
+
+/* Dropdown container */
+.ts-dropdown {
+  position: relative;
+  z-index: 10000;
+}
+
+/* Dropdown menu must be clickable and on top */
+.ts-dropdown-menu {
+  position: absolute;
+  z-index: 10001;
+  pointer-events: auto;
+}
+
+/* If you hide/show via open class, make sure pointer-events toggles correctly */
+.ts-dropdown .ts-dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ts-dropdown.open .ts-dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+/* ---------------------------
+   FIX: overlay blocking clicks
+   --------------------------- */
+.ts-overlay {
+  pointer-events: none;        /* IMPORTANT: don't block clicks when closed */
+}
+
+.ts-overlay.open {
+  pointer-events: auto;        /* only clickable when actually open */
+}
+
+/* ---------------------------
+   FIX: dropdown must be clickable + on top
+   --------------------------- */
+.ts-dropdown {
+  position: relative;
+}
+
+.ts-dropdown-menu {
+  position: absolute;          /* typical dropdown positioning */
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;               /* be above hero images, etc. */
+  pointer-events: auto;        /* IMPORTANT: allow clicks */
+}
+
+/* If your menu uses visibility/opacity transitions, ensure it becomes clickable when open */
+.ts-dropdown .ts-dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.ts-dropdown.open .ts-dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+}
+.ts-dropdown-menu button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 12px 16px;
+  cursor: pointer;
+  font: inherit;
+}
+.ts-dropdown-menu button:hover {
+  background: rgba(0,0,0,0.05);
 }

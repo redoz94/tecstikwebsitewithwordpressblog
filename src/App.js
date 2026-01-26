@@ -28,10 +28,11 @@ export default function App() {
         <Route path="/TecStik-Portfolio" element={<Portfolio />} />
 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-        <Route path="/TecStik-Blockchain" element={<Blockchain />} />
-        <Route path="/TecStik-WebDevelopment" element={<WebAndMobile />} />
-        <Route path="/TecStik-MobileApp" element={<MobileApp />} />
-        <Route path="/TecStik-Cloud" element={<Cloud />} />
+       <Route path="/TecStik-Blockchain" element={<Blockchain />} />
+<Route path="/TecStik-WebDevelopment" element={<WebAndMobile />} />
+<Route path="/TecStik-MobileApp" element={<MobileApp />} />
+<Route path="/TecStik-Cloud" element={<Cloud />} />
+
 
         <Route path="/TecStik-Product" element={<Product />} />
         <Route path="/TecStik-Careers" element={<Careers />} />

@@ -34,7 +34,8 @@ export default function Footer() {
         >
           <div className="me-5"></div>
           <div>
-            <a href={() => false} class="text-white me-3">
+            <a href="#" className="text-white me-3" onClick={(e) => e.preventDefault()}>
+
               {" "}
               Find us online :
             </a>
@@ -55,7 +56,7 @@ export default function Footer() {
             <a
               href="https://www.linkedin.com/company/tecstik/about/?viewAsMember=true"
               target="_blank"
-              class="text-white me-4"
+              className="text-white me-4"
             >
               <i className="fab fa-linkedin"></i>
             </a>
@@ -136,7 +137,7 @@ export default function Footer() {
                 </p>
                 <p>
                   <i className="fas fa-envelope mr-3"></i>
-                  <a href="mailto:info@tecstik.com" class="text-white">
+                  <a href="mailto:info@tecstik.com" className="text-white">
                     info@tecstik.com
                   </a>
                 </p>

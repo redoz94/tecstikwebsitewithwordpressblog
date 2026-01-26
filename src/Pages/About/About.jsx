@@ -50,12 +50,12 @@ const About = () => {
 
               <p className="text_justify">
                 <br />
-                When a Company’s Business Strategy and Technology Strategy are intertwined, The Company Prospers. As The Technology Arm of Pacific Financial Services PVT. LTD. – a company operating in the international financial market for over 20 years, TecStik conducts meticulous efforts to build Fintech for Business Owners and The Mass Market.
+                When a Company’s Business Strategy and Technology Strategy are intertwined, The Company Prospers. As The Technology Arm of Pacific Financial Services Pvt. Ltd. – a company operating in the international financial market for over 20 years, TecStik dedicates meticulous efforts of rigorous technology development for Business Owners and the broader market.
                 <br />
                 <br />
-                By applying Fintech for Business Owners, TecStik Supports your Finance Processes by using Cloud-Computing, Blockchain Development, Web Development and App Development. Prepare for  your financial efficiency to surpass customary methods.  Build a Legacy of your Company’s Financial operations with TecStik.
+                TecStik optimizes your business operations for efficiency by using Cloud-Computing, Blockchain Development, Web Development and App Development. Unlock superior workflow efficiency.  Build a Legacy of your Company’s initiatives with TecStik.
               </p>
-              <p className="text_justify">TecStik's expertise extensively lie in creating Fintech that supports and actively revolutionize how the global market handle their personal finances.</p>
+             
             </div>
 
             <div className="col-lg-6 cardTextImage">
