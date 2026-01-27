@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./Contact.css";
@@ -54,7 +56,7 @@ const Contact = () => {
       `Name: ${userName}`,
       `Email: ${userEmail}`,
       "",
-      "Message:",
+      "How can TecStik's Team help you today?:",
       userText,
       "",
     ];
@@ -70,11 +72,12 @@ const Contact = () => {
     // Open the user's email client
     window.location.href = mailtoHref;
 
-    toast.info("Opening your email app…", {
-      position: "top-right",
-      autoClose: 2500,
-      theme: "light",
-    });
+   toast.info("Opening your email app…", {
+  position: "top-right",
+  autoClose: 2500,
+  theme: "light",
+  icon: false,          // ✅ removes the big icon
+});
 
     // Optional: reset form fields (kept similar to your previous reset)
     if (firstname.current) firstname.current.value = "";
@@ -135,6 +138,8 @@ const Contact = () => {
                 <i className="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
                 <p> +92-21 33541438</p>
+               <FontAwesomeIcon icon={faWhatsapp} />
+                <p> +92 335-2070555</p>
               </div>
             </div>
           </div>
