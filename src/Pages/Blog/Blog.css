@@ -469,5 +469,34 @@
     margin-top: 24px;
   }
 }
+/* ✅ FIX: WordPress list bullets/numbering inside blog content */
+.ts-blogpost-contentInner ul,
+.ts-blogpost-contentInner ol {
+  list-style: revert;          /* restores default bullets/numbers */
+  margin: 1rem 0;
+  padding-left: 1.5rem;        /* gives proper indent */
+}
+
+.ts-blogpost-contentInner li {
+  list-style: revert;
+  margin: 0.35rem 0;
+  padding: 0;
+  display: list-item;          /* prevents flex/grid styles from breaking bullets */
+}
+
+/* WordPress often wraps li text in <p> which adds spacing */
+.ts-blogpost-contentInner li > p {
+  margin: 0;
+  display: inline;             /* keeps bullet + text aligned like your “first correct one” */
+}
+
+/* Nested lists: indent a bit more */
+.ts-blogpost-contentInner li ul,
+.ts-blogpost-contentInner li ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+}
+
 
 

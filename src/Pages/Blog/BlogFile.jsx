@@ -3,11 +3,27 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Blog.css";
+import { decode } from "html-entities"; // ✅ npm library
 
 // WordPress REST base
 const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
 
 const stripHtml = (html = "") => html.replace(/<[^>]*>/g, "").trim();
+
+// ✅ Fix WP double-encoded titles, then force straight apostrophe '
+const decodeWpTitle = (value = "") => {
+  let cur = String(value);
+  let prev = null;
+
+  // decode up to 5 times to handle "Pakistan&amp;#8217;s"
+  for (let i = 0; i < 5 && cur !== prev; i++) {
+    prev = cur;
+    cur = decode(cur);
+  }
+
+  // your requirement: show a straight apostrophe
+  return cur.replace(/[’‘]/g, "'");
+};
 
 function getFeaturedImage(post) {
   const media = post?._embedded?.["wp:featuredmedia"]?.[0];
@@ -53,7 +69,8 @@ function buildTOCAndContent(html = "") {
       ? existingIdMatch[1]
       : `${slugify(text) || "section"}-${idx + 1}`;
 
-    toc.push({ id, text, level });
+    // ✅ Keep TOC readable (decode entities in headings too)
+    toc.push({ id, text: decodeWpTitle(text), level });
 
     if (!hasId) {
       const original = m[0];
@@ -95,8 +112,10 @@ export default function BlogFile() {
       setAuthorName("");
 
       try {
-        // ✅ Fetch ONE post by slug (this is the key difference)
-        const res = await fetch(`${WP_BASE}/posts?slug=${encodeURIComponent(slug)}&_embed=1`);
+        // ✅ Fetch ONE post by slug
+        const res = await fetch(
+          `${WP_BASE}/posts?slug=${encodeURIComponent(slug)}&_embed=1`
+        );
         if (!res.ok) throw new Error("Failed to fetch blog post");
         const data = await res.json();
 
@@ -137,7 +156,11 @@ export default function BlogFile() {
 
   const featuredImg = useMemo(() => getFeaturedImage(post), [post]);
 
-  const title = useMemo(() => stripHtml(post?.title?.rendered || ""), [post]);
+  // ✅ ONLY FIX NEEDED: decode title with npm library (handles &amp;#8217;)
+  const title = useMemo(
+    () => decodeWpTitle(stripHtml(post?.title?.rendered || "")),
+    [post]
+  );
 
   const updated = useMemo(() => formatDate(post?.modified), [post]);
 
@@ -151,10 +174,18 @@ export default function BlogFile() {
   const pageUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const share = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(title)}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`,
-    email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(pageUrl)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      pageUrl
+    )}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      pageUrl
+    )}&text=${encodeURIComponent(title)}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      pageUrl
+    )}`,
+    email: `mailto:?subject=${encodeURIComponent(
+      title
+    )}&body=${encodeURIComponent(pageUrl)}`,
   };
 
   const scrollToId = (id) => {
@@ -170,7 +201,9 @@ export default function BlogFile() {
       {/* HERO (featured image) */}
       <section
         className="ts-blogpost-hero"
-        style={featuredImg ? { backgroundImage: `url(${featuredImg})` } : undefined}
+        style={
+          featuredImg ? { backgroundImage: `url(${featuredImg})` } : undefined
+        }
       >
         <div className="ts-blogpost-hero-overlay" />
 
@@ -181,9 +214,7 @@ export default function BlogFile() {
             <span className="ts-blogpost-author">
               Author: {authorName || "TecStik"}
             </span>
-            <span className="ts-blogpost-date">
-              Updated on: {updated || ""}
-            </span>
+            <span className="ts-blogpost-date">Updated on: {updated || ""}</span>
           </div>
         </div>
       </section>
@@ -197,10 +228,18 @@ export default function BlogFile() {
             <p>Share across your favourite social media:</p>
 
             <div className="ts-blogpost-shareBtns">
-              <a href={share.facebook} target="_blank" rel="noreferrer">f</a>
-              <a href={share.twitter} target="_blank" rel="noreferrer">x</a>
-              <a href={share.email} target="_blank" rel="noreferrer">✉</a>
-              <a href={share.linkedin} target="_blank" rel="noreferrer">in</a>
+              <a href={share.facebook} target="_blank" rel="noreferrer">
+                f
+              </a>
+              <a href={share.twitter} target="_blank" rel="noreferrer">
+                x
+              </a>
+              <a href={share.email} target="_blank" rel="noreferrer">
+                ✉
+              </a>
+              <a href={share.linkedin} target="_blank" rel="noreferrer">
+                in
+              </a>
             </div>
 
             <div style={{ marginTop: 20 }}>

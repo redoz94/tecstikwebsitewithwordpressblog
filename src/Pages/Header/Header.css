@@ -8,7 +8,13 @@
 }
 
 .ts-header.is-scrolled {
+  background: rgba(242, 242, 242, 0.92); /* your light grey, slightly transparent */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+
+  /* Optional “frosted” effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .ts-header-inner {
@@ -334,9 +340,21 @@
 
 /* ===== Keep header & dropdown on top ===== */
 .ts-header {
-  position: sticky; /* keep your existing behavior */
+  position: sticky;
   top: 0;
   z-index: 9999;
+
+  /* Start transparent (over hero) */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+
+  /* Smooth transition like Tecstik-Meet */
+  transition:
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    backdrop-filter 220ms ease;
 }
 
 /* Dropdown container */
@@ -455,4 +473,62 @@
 }
 .ts-dropdown-menu button:hover {
   background: rgba(0,0,0,0.05);
+}
+/* =========================================================
+   NAVBAR TEXT COLOR LOGIC (SAFE VERSION)
+   ========================================================= */
+
+/* 1. Default state (top of page): make ONLY top-level nav items white */
+@media (min-width: 992px) {
+  .ts-header:not(.is-scrolled) 
+  .ts-desktop-list > li > a,
+  .ts-header:not(.is-scrolled) 
+  .ts-desktop-list > li > .ts-dropdown-trigger {
+    color: #ffffff;
+  }
+
+  /* Caret also white */
+  .ts-header:not(.is-scrolled) .ts-caret {
+    color: #ffffff;
+  }
+}
+
+/* 2. Keep dropdown menu items ALWAYS black */
+.ts-dropdown-menu a,
+.ts-dropdown-menu button {
+  color: #111 !important;
+}
+
+/* 3. Keep homepage content untouched (safety reset) */
+main,
+main * {
+  color: inherit;
+}
+/* =========================================================
+   HOME PAGE ONLY:
+   - At top (not scrolled): make ONLY top-level navbar items white
+   - Dropdown menu items remain black
+   ========================================================= */
+
+@media (min-width: 992px) {
+  /* Only on Home + only when NOT scrolled */
+  .ts-header.is-home:not(.is-scrolled) .ts-desktop-list > li > a,
+  .ts-header.is-home:not(.is-scrolled) .ts-desktop-list > li > .ts-dropdown-trigger {
+    color: #fff;
+  }
+
+  .ts-header.is-home:not(.is-scrolled) .ts-caret {
+    color: #fff;
+  }
+
+  .ts-header.is-home:not(.is-scrolled) .ts-desktop-list > li > a:hover,
+  .ts-header.is-home:not(.is-scrolled) .ts-desktop-list > li > .ts-dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Dropdown items must ALWAYS be black */
+.ts-dropdown-menu a,
+.ts-dropdown-menu button {
+  color: #111 !important;
 }

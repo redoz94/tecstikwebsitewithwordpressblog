@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import tecStikLogo from "../images/tecStikLogo.png";
 
-export default function Header() {
+export default function Header({ currentPage }) {
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -87,16 +87,26 @@ export default function Header() {
     };
   }, []);
 
+  const isHome = String(currentPage || "").toLowerCase() === "home";
+
   const NavItems = ({ onNavigate }) => (
     <>
       <li>
-        <NavLink to="/" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Home
         </NavLink>
       </li>
 
       <li>
-        <NavLink to="/Tecstik-Meet" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/Tecstik-Meet"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Meet TecStik
         </NavLink>
       </li>
@@ -126,52 +136,83 @@ export default function Header() {
           aria-label="Our Expertise"
           onMouseEnter={() => isDesktop() && openExpertise()}
           onMouseLeave={() => isDesktop() && closeExpertiseDelayed()}
-          onMouseDown={(e) => e.stopPropagation()}  /* helps prevent outside-click logic fighting */
+          onMouseDown={(e) => e.stopPropagation()}
         >
-          <button type="button" role="menuitem" onClick={() => go("/TecStik-Blockchain", onNavigate)}>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => go("/TecStik-Blockchain", onNavigate)}
+          >
             Blockchain
           </button>
 
-          <button type="button" role="menuitem" onClick={() => go("/TecStik-WebDevelopment", onNavigate)}>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => go("/TecStik-WebDevelopment", onNavigate)}
+          >
             Web Development
           </button>
 
-          <button type="button" role="menuitem" onClick={() => go("/TecStik-MobileApp", onNavigate)}>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => go("/TecStik-MobileApp", onNavigate)}
+          >
             Mobile Apps
           </button>
 
-          <button type="button" role="menuitem" onClick={() => go("/TecStik-Cloud", onNavigate)}>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => go("/TecStik-Cloud", onNavigate)}
+          >
             Cloud
           </button>
         </div>
       </li>
 
       <li>
-        <NavLink to="/TecStik-Product" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/TecStik-Product"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Products
         </NavLink>
       </li>
 
       <li>
-        <NavLink to="/TecStik-Portfolio" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/TecStik-Portfolio"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Portfolio
         </NavLink>
       </li>
 
       <li>
-        <NavLink to="/TecStik-Blog" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
-          Blog
-        </NavLink>
+        <a href="https://tecstik.com/TecStik-Blog">Blog</a>
+
       </li>
 
       <li>
-        <NavLink to="/TecStik-Careers" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/TecStik-Careers"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Careers
         </NavLink>
       </li>
 
       <li>
-        <NavLink to="/TecStik-Contact" onClick={onNavigate} className={({ isActive }) => (isActive ? "is-active" : "")}>
+        <NavLink
+          to="/TecStik-Contact"
+          onClick={onNavigate}
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
           Contact
         </NavLink>
       </li>
@@ -179,7 +220,9 @@ export default function Header() {
   );
 
   return (
-    <header className={`ts-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header
+      className={`ts-header ${scrolled ? "is-scrolled" : ""} ${isHome ? "is-home" : ""}`}
+    >
       <div className="ts-container ts-header-inner">
         <Link to="/" onClick={closeAll} className="ts-brand" aria-label="TecStik Home">
           <img src={tecStikLogo} className="ts-logo" alt="TecStik" />
@@ -204,7 +247,11 @@ export default function Header() {
           <span />
         </button>
 
-        <div className={`ts-overlay ${menuOpen ? "open" : ""}`} onClick={closeAll} aria-hidden={!menuOpen} />
+        <div
+          className={`ts-overlay ${menuOpen ? "open" : ""}`}
+          onClick={closeAll}
+          aria-hidden={!menuOpen}
+        />
 
         <nav
           id="ts-mobile-drawer"

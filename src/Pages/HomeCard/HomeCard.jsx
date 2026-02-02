@@ -12,9 +12,14 @@ import BlockChain from "../images/blockchainIcon.png";
 import mobileIcon from "../images/mobileIcon.png";
 import Public from "../images/Public.png";
 import cloud from "./cloud.png";
-
+const decodeHtml = (str = "") => {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = str;
+  return txt.value;
+};
 export default function HomeCard() {
   return (
+    
     <div className="container">
       <div className="row">
         {/* ===== Blockchain ===== */}

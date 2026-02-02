@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Blog.css";
+import he from "he";
 
 // ✅ Import your hero image from src
 import blogHero from "../images/Blog.png";
@@ -11,6 +12,24 @@ import blogHero from "../images/Blog.png";
 const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
 
 const stripHtml = (html = "") => html.replace(/<[^>]*>/g, "").trim();
+
+// ✅ Decode HTML entities even if WP sends them double-encoded
+// Example: "Pakistan&amp;#8217;s" -> "Pakistan&#8217;s" -> "Pakistan’s"
+const decodeDeep = (str = "") => {
+  let prev = null;
+  let cur = str;
+
+  // decode up to 3 times, stop early if it stops changing
+  for (let i = 0; i < 3 && cur !== prev; i++) {
+    prev = cur;
+    cur = he.decode(cur);
+  }
+
+  return cur;
+};
+
+// ✅ Safe plain text for UI (strip tags + deep decode)
+const cleanText = (html = "") => decodeDeep(stripHtml(html));
 
 function getFeaturedImage(post) {
   const media = post?._embedded?.["wp:featuredmedia"]?.[0];
@@ -29,7 +48,6 @@ export default function Blog() {
   const [query, setQuery] = useState("");
 
   // ✅ Fixed hero image for BLOG DIRECTORY ONLY (NOT from WP featured images)
-  // Use imported src image:
   const BLOG_DIRECTORY_HERO = blogHero;
 
   useEffect(() => {
@@ -70,8 +88,8 @@ export default function Blog() {
     if (!q) return posts;
 
     return posts.filter((p) => {
-      const title = stripHtml(p?.title?.rendered || "").toLowerCase();
-      const excerpt = stripHtml(p?.excerpt?.rendered || "").toLowerCase();
+      const title = cleanText(p?.title?.rendered || "").toLowerCase();
+      const excerpt = cleanText(p?.excerpt?.rendered || "").toLowerCase();
       return title.includes(q) || excerpt.includes(q);
     });
   }, [posts, query]);
@@ -127,10 +145,12 @@ export default function Blog() {
           <div className="ts-blogdir-grid">
             {filtered.map((post) => {
               const img = getFeaturedImage(post);
-              const title = stripHtml(post?.title?.rendered || "");
-              const excerpt = stripHtml(post?.excerpt?.rendered || "").slice(0, 220);
-              const slug = post?.slug;
 
+              // ✅ FIXED: deep decode so &#8217; becomes a real apostrophe
+              const title = cleanText(post?.title?.rendered || "");
+              const excerpt = cleanText(post?.excerpt?.rendered || "").slice(0, 220);
+
+              const slug = post?.slug;
               const to = slug ? `/TecStik-Blog/${slug}` : "/TecStik-Blog";
 
               return (

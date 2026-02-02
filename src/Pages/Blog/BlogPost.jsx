@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import he from "he";
 import "./BlogPost.css";
 
 const WP_BASE = "*wpinstallurl*"; // SAME as Blog.jsx
@@ -36,7 +37,7 @@ const BlogPost = () => {
 
   const featuredImage =
     post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-
+const title = he.decode(post.title?.rendered ?? "");
   return (
     <>
       <Header />
@@ -49,6 +50,7 @@ const BlogPost = () => {
         <h1
           dangerouslySetInnerHTML={{ __html: post.title.rendered }}
         />
+        <h3>{title}</h3>;
       </section>
 
       {/* CONTENT AREA */}
