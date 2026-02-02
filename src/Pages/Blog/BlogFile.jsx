@@ -8,21 +8,32 @@ import { decode } from "html-entities"; // ✅ npm library
 // WordPress REST base
 const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
 
-const stripHtml = (html = "") => html.replace(/<[^>]*>/g, "").trim();
+const stripHtml = (html = "") => String(html).replace(/<[^>]*>/g, "").trim();
 
-// ✅ Fix WP double-encoded titles, then force straight apostrophe '
-const decodeWpTitle = (value = "") => {
-  let cur = String(value);
+/**
+ * ✅ Robust decode for WP strings:
+ * - Handles "Pakistan&amp;#8217;s" (double encoded)
+ * - Handles "Pakistan&#8217;s" (numeric entity)
+ * - Handles "Pakistan&rsquo;s" (named entity)
+ * - Then forces straight apostrophe: '
+ */
+const decodeWpText = (value = "") => {
+  let cur = String(value ?? "");
   let prev = null;
 
-  // decode up to 5 times to handle "Pakistan&amp;#8217;s"
-  for (let i = 0; i < 5 && cur !== prev; i++) {
+  // Decode multiple times until stable (max 6 passes)
+  for (let i = 0; i < 6 && cur !== prev; i++) {
     prev = cur;
     cur = decode(cur);
   }
 
-  // your requirement: show a straight apostrophe
-  return cur.replace(/[’‘]/g, "'");
+  // Strip any leftover tags AFTER decode
+  cur = stripHtml(cur);
+
+  // Force straight apostrophe as per your requirement
+  cur = cur.replace(/[’‘]/g, "'");
+
+  return cur;
 };
 
 function getFeaturedImage(post) {
@@ -60,7 +71,9 @@ function buildTOCAndContent(html = "") {
     const level = Number(m[1]); // 2 or 3
     const attrs = m[2] || "";
     const inner = m[3] || "";
-    const text = stripHtml(inner);
+
+    // ✅ decode headings text properly for TOC readability
+    const text = decodeWpText(inner);
 
     const existingIdMatch = attrs.match(/id\s*=\s*["']([^"']+)["']/);
     const hasId = Boolean(existingIdMatch?.[1]);
@@ -69,8 +82,7 @@ function buildTOCAndContent(html = "") {
       ? existingIdMatch[1]
       : `${slugify(text) || "section"}-${idx + 1}`;
 
-    // ✅ Keep TOC readable (decode entities in headings too)
-    toc.push({ id, text: decodeWpTitle(text), level });
+    toc.push({ id, text, level });
 
     if (!hasId) {
       const original = m[0];
@@ -156,11 +168,8 @@ export default function BlogFile() {
 
   const featuredImg = useMemo(() => getFeaturedImage(post), [post]);
 
-  // ✅ ONLY FIX NEEDED: decode title with npm library (handles &amp;#8217;)
-  const title = useMemo(
-    () => decodeWpTitle(stripHtml(post?.title?.rendered || "")),
-    [post]
-  );
+  // ✅ Title fixed (decode first, then strip html, then force ')
+  const title = useMemo(() => decodeWpText(post?.title?.rendered || ""), [post]);
 
   const updated = useMemo(() => formatDate(post?.modified), [post]);
 
