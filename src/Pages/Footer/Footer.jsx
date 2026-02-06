@@ -4,7 +4,6 @@ import privacyPdf from "./PrivacyPolicy.pdf";
 import { Link } from "react-router-dom";
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-
 export default function Footer() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentTab = searchParams.get("tab") || "0";
@@ -35,7 +34,6 @@ export default function Footer() {
           <div className="me-5"></div>
           <div>
             <a href="#" className="text-white me-3" onClick={(e) => e.preventDefault()}>
-
               {" "}
               Find us online :
             </a>
@@ -43,6 +41,7 @@ export default function Footer() {
               href="https://www.facebook.com/profile.php?id=100087185961853"
               target="_blank"
               className="text-white me-4"
+              rel="noreferrer"
             >
               <i className="fab fa-facebook-f"></i>
             </a>
@@ -50,6 +49,7 @@ export default function Footer() {
               href="https://twitter.com/Tec_Stik"
               target="_blank"
               className="text-white me-4"
+              rel="noreferrer"
             >
               <i className="fab fa-twitter"></i>
             </a>
@@ -57,6 +57,7 @@ export default function Footer() {
               href="https://www.linkedin.com/company/tecstik/about/?viewAsMember=true"
               target="_blank"
               className="text-white me-4"
+              rel="noreferrer"
             >
               <i className="fab fa-linkedin"></i>
             </a>
@@ -142,12 +143,17 @@ export default function Footer() {
                   </a>
                 </p>
                 <p>
-                  <i className="fas fa-phone mr-3"></i> +92-21 33541438 
+                  <i className="fas fa-phone mr-3"></i> +92-21 33541438
                 </p>
-                <a href={privacyPdf} target="_blank" rel="noopener noreferrer">
-  Privacy Policy
-</a>
 
+                <p>
+                  <i className="bi bi-whatsapp me-2"></i>
+                  WhatsApp: +92 335 2070555
+                </p>
+
+                <a href={privacyPdf} target="_blank" rel="noopener noreferrer">
+                  Privacy Policy
+                </a>
               </div>
             </div>
           </div>
