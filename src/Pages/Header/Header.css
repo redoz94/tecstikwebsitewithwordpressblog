@@ -32,11 +32,33 @@ backdrop-filter: blur(10px);
 
 
 /* Brand */
+/* ===============================
+   BRAND / LOGO BUTTON FIX
+   =============================== */
+
 .ts-brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  text-decoration: none;
+
+  background: transparent !important;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-shadow: none;
+}
+
+/* Remove browser focus white box */
+.ts-brand:focus,
+.ts-brand:active {
+  outline: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .ts-logo {
@@ -44,6 +66,7 @@ backdrop-filter: blur(10px);
   width: auto;
   display: block;
   margin-left: 50px;
+  background: transparent;
 }
 
 /* ===== Desktop Nav ===== */
@@ -81,7 +104,32 @@ backdrop-filter: blur(10px);
 .ts-desktop-list a.is-active {
   font-weight: 600;
 }
+/* Make the Home <button> look like your other nav links */
+/* =========================================
+   HOME NAV ITEM — IDENTICAL TO NAVLINKS
+   ========================================= */
 
+.ts-desktop-list > li > .ts-nav-home {
+  font-size: 16px;
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 10px 10px;
+  border-radius: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Hover identical */
+.ts-desktop-list > li > .ts-nav-home:hover {
+  background: rgba(255,255,255,0.12);
+}
+.ts-desktop-list .ts-nav-home:hover {
+  background: rgba(255, 255, 255, 0.12); /* or match your existing hover */
+}
 /* ===== Dropdown (Desktop + Mobile) ===== */
 .ts-dropdown {
   position: relative;
@@ -484,10 +532,12 @@ backdrop-filter: blur(10px);
 
 /* 1. Default state (top of page): make ONLY top-level nav items white */
 @media (min-width: 992px) {
-  .ts-header:not(.is-scrolled) 
-  .ts-desktop-list > li > a,
-  .ts-header:not(.is-scrolled) 
-  .ts-desktop-list > li > .ts-dropdown-trigger {
+.ts-header:not(.is-scrolled)
+.ts-desktop-list > li > a,
+.ts-header:not(.is-scrolled)
+.ts-desktop-list > li > button,
+.ts-header:not(.is-scrolled)
+.ts-desktop-list > li > .ts-dropdown-trigger{
     color: #ffffff;
   }
 
@@ -543,8 +593,10 @@ main * {
 @media (min-width: 992px) {
 
   /* Top-level nav items */
-  .ts-header.is-scrolled 
-  .ts-desktop-list > li > a,
+ .ts-header.is-scrolled
+.ts-desktop-list > li > a,
+.ts-header.is-scrolled
+.ts-desktop-list > li > button,
   .ts-header.is-scrolled 
   .ts-desktop-list > li > .ts-dropdown-trigger {
     color: #cfe3ff !important;   /* 👈 your chosen color */

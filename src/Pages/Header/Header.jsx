@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import tecStikLogo from "../images/tecStikLogo.png";
 
@@ -33,6 +33,7 @@ export default function Header({ currentPage }) {
     closeTimerRef.current = setTimeout(() => setExpertiseOpen(false), 220);
   };
 
+  // ✅ Programmatic navigation (keeps SPA routing; avoids server old homepage)
   const go = (path, onNavigate) => {
     setExpertiseOpen(false);
     setMenuOpen(false);
@@ -92,13 +93,10 @@ export default function Header({ currentPage }) {
   const NavItems = ({ onNavigate }) => (
     <>
       <li>
-        <NavLink
-          to="/"
-          onClick={onNavigate}
-          className={({ isActive }) => (isActive ? "is-active" : "")}
-        >
+        {/* ✅ Home stays inside React Router (always NewHome.jsx via "/" route) */}
+        <button type="button" className="ts-nav-home" onClick={() => go("/", onNavigate)}>
           Home
-        </NavLink>
+        </button>
       </li>
 
       <li>
@@ -138,35 +136,19 @@ export default function Header({ currentPage }) {
           onMouseLeave={() => isDesktop() && closeExpertiseDelayed()}
           onMouseDown={(e) => e.stopPropagation()}
         >
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => go("/TecStik-Blockchain", onNavigate)}
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-Blockchain", onNavigate)}>
             Blockchain
           </button>
 
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => go("/TecStik-WebDevelopment", onNavigate)}
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-WebDevelopment", onNavigate)}>
             Web Development
           </button>
 
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => go("/TecStik-MobileApp", onNavigate)}
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-MobileApp", onNavigate)}>
             Mobile Apps
           </button>
 
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => go("/TecStik-Cloud", onNavigate)}
-          >
+          <button type="button" role="menuitem" onClick={() => go("/TecStik-Cloud", onNavigate)}>
             Cloud
           </button>
         </div>
@@ -193,8 +175,8 @@ export default function Header({ currentPage }) {
       </li>
 
       <li>
-        <a href="https://tecstik.com/TecStik-Blog">Blog</a>
-
+        {/* ✅ Relative URL so it works on localhost AND live domain */}
+        <a href="/TecStik-Blog">Blog</a>
       </li>
 
       <li>
@@ -220,13 +202,12 @@ export default function Header({ currentPage }) {
   );
 
   return (
-    <header
-      className={`ts-header ${scrolled ? "is-scrolled" : ""} ${isHome ? "is-home" : ""}`}
-    >
+    <header className={`ts-header ${scrolled ? "is-scrolled" : ""} ${isHome ? "is-home" : ""}`}>
       <div className="ts-container ts-header-inner">
-        <Link to="/" onClick={closeAll} className="ts-brand" aria-label="TecStik Home">
+        {/* ✅ Logo click also stays inside React Router */}
+        <button type="button" className="ts-brand" onClick={() => go("/", closeAll)} aria-label="TecStik Home">
           <img src={tecStikLogo} className="ts-logo" alt="TecStik" />
-        </Link>
+        </button>
 
         <nav className="ts-desktop-nav" aria-label="Primary">
           <ul className="ts-desktop-list">
@@ -247,11 +228,7 @@ export default function Header({ currentPage }) {
           <span />
         </button>
 
-        <div
-          className={`ts-overlay ${menuOpen ? "open" : ""}`}
-          onClick={closeAll}
-          aria-hidden={!menuOpen}
-        />
+        <div className={`ts-overlay ${menuOpen ? "open" : ""}`} onClick={closeAll} aria-hidden={!menuOpen} />
 
         <nav
           id="ts-mobile-drawer"
