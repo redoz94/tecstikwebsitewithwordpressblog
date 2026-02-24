@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./NewHome.css";
@@ -8,15 +7,14 @@ import "./NewHome.css";
 import BlockcIcon from "../images/BlockcIcon.png";
 import reactlogo from "../images/reactlogo.png";
 import bordaLabtop from "../images/bordaLabtop.png";
-import kuber from "../images/kuber.png";
 import blockchain from "./blockchain.png";
 
 import HomeCard from "../HomeCard/HomeCard";
 
 const NewHome = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentTab = searchParams.get("tab") || "0";
-  const [currentPage, setCurrentPage] = useState("Home"); // Set the current page name
+  const currentTab = searchParams.get("tab") || "0"; // kept for compatibility
+  const [currentPage, setCurrentPage] = useState("Home");
 
   const changeTab = (tab) => {
     searchParams.set("tab", tab);
@@ -24,81 +22,229 @@ const NewHome = () => {
   };
 
   useEffect(() => {
-    setCurrentPage("Home"); // Update the current page on component mount
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    setCurrentPage("Home");
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [searchParams]);
 
   return (
-    <div id="NewHome">
+    <div id="NewHome" className="ts-home">
       <Header currentPage={currentPage} />
 
-      <section className="ts-section">
-        <div className="ts-container ts-hero">
-          <div className="ts-hero-left">
-            <p className="ts-eyebrow">TecStik Technologies</p>
+      {/* HERO */}
+      <section className="ts-hero2">
+        <div className="ts-hero2-bg" />
+        <div className="ts-container ts-hero2-inner">
+          <div className="ts-hero2-left">
+           
 
-            <h3>Propelling your Business Growth</h3>
+            <h1 className="ts-hero2-title">
+              Accelerate Your B2B SaaS Growth
+              <br />
+              Engine.
+            </h1>
 
-            <Link to="/Tecstik-Meet" className="ts-primary-btn">
-              Meet TecStik
-            </Link>
+            <p className="ts-hero2-sub">
+              Helping SaaS companies drive visibility, leads, and revenue with strategic
+              content, research intelligence, and conversion-first campaigns.
+            </p>
+
+            <div className="ts-hero2-cta">
+              <Link 
+              onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("counts")?.scrollIntoView({ behavior: "smooth" });
+                }}className="ts-btn ts-btn-primary">
+                Get a Free Strategy Consultation
+              </Link>
+
+              <a
+                href="#counts"
+                className="ts-btn ts-btn-ghost"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("counts")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Book Strategy Call
+              </a>
+            </div>
+
+            <div className="ts-hero2-micro">
+              <div className="ts-pill">Product-led content</div>
+              <div className="ts-pill">SaaS SEO systems</div>
+              <div className="ts-pill">Research hub comparisons</div>
+              <div className="ts-pill">Demand gen</div>
+            </div>
           </div>
 
-          <div className="ts-hero-right">
-            <img src={bordaLabtop} alt="TecStik Platform" />
+          <div className="ts-hero2-right">
+            <div className="ts-hero2-frame">
+              <img className="ts-hero2-image" src={bordaLabtop} alt="TecStik dashboard" />
+            </div>
+
+            {/* Floating “icons” (purely visual) */}
+            <div className="ts-float ts-float-1">G</div>
+            <div className="ts-float ts-float-2">✦</div>
+            <div className="ts-float ts-float-3">⟡</div>
+            <div className="ts-float ts-float-4">⚡</div>
           </div>
         </div>
       </section>
 
-      <section className="sponsor section_images">
-        <div className="column">
-          <div className="container-fluid">
-            <div className="row justify-content-center" id="cardlogo">
-              <div className="col-6 col-md-2 col-sm-6">
-                <img
-                  src={BlockcIcon}
-                  alt=""
-                  data-aos="zoom-in"
-                  data-aos-delay="500"
-                  data-aos-anchor=".intro"
-                  className="aos-init aos-animate"
+      {/* TRUST + RESEARCH HUB PREVIEW */}
+      <section className="ts-trust">
+        <div className="ts-container">
+          <h3 className="ts-section-title">Trusted By Modern SaaS Companies</h3>
+
+          <div className="ts-trust-row">
+            <img className="ts-trust-logo" src={BlockcIcon} alt="logo 1" />
+            <img className="ts-trust-logo" src={reactlogo} alt="logo 2" />
+            <img className="ts-trust-logo" src={blockchain} alt="logo 3" />
+          </div>
+
+          <div className="ts-hub">
+            <div className="ts-hub-search">
+              <div className="ts-hub-searchbar">
+                <span className="ts-hub-search-icon">🔎</span>
+                {/* UI-only input; does NOT change functionality */}
+                <input
+                  className="ts-hub-input"
+                  placeholder="Search software, categories or keywords"
+                  aria-label="Search software"
                 />
+                <Link to="/research-hub" className="ts-btn ts-btn-primary ts-btn-small">
+                  Search
+                </Link>
               </div>
 
-              <div className="col-6 col-md-2 col-sm-6">
-                <img
-                  src={reactlogo}
-                  alt=""
-                  data-aos="zoom-in"
-                  data-aos-delay="750"
-                  data-aos-anchor=".intro"
-                  className="aos-init aos-animate"
-                />
+              <div className="ts-hub-chips">
+                <button className="ts-chip" type="button">
+                  CRM
+                </button>
+                <button className="ts-chip" type="button">
+                  Marketing
+                </button>
+                <button className="ts-chip" type="button">
+                  Analytics
+                </button>
+                <button className="ts-chip" type="button">
+                  Finance
+                </button>
+              </div>
+            </div>
+
+            <div className="ts-hub-cards">
+              <div className="ts-hub-card">
+                <div className="ts-hub-card-top">
+                  <h4>HubSpot vs Salesforce</h4>
+                  <div className="ts-stars">★★★★★</div>
+                </div>
+                <p className="ts-hub-card-sub">
+                  Compare features, pricing, pros &amp; cons.
+                </p>
+                <Link to="/research-hub" className="ts-btn ts-btn-ghost ts-btn-small">
+                  View Comparison
+                </Link>
               </div>
 
-              <div className="col-6 col-md-2 col-sm-6">
-                <img
-                  src={blockchain}
-                  alt="blockchain"
-                  data-aos="zoom-in"
-                  data-aos-delay="0"
-                  data-aos-anchor=".intro"
-                  className="aos-init aos-animate"
-                />
+              <div className="ts-hub-card">
+                <div className="ts-hub-card-top">
+                  <h4>Stripe vs Chargebee</h4>
+                  <div className="ts-stars">★★★★★</div>
+                </div>
+                <p className="ts-hub-card-sub">
+                  Billing + payments: which fits your SaaS stack?
+                </p>
+                <Link to="/research-hub" className="ts-btn ts-btn-ghost ts-btn-small">
+                  View Comparison
+                </Link>
               </div>
+
+              <div className="ts-hub-card">
+                <div className="ts-hub-card-top">
+                  <h4>Best Product Analytics Tools</h4>
+                  <div className="ts-hub-tags">mixpanel • amplitude • heap</div>
+                </div>
+                <p className="ts-hub-card-sub">
+                  Shortlists, reviews and implementation tips.
+                </p>
+                <Link to="/research-hub" className="ts-btn ts-btn-ghost ts-btn-small">
+                  View Comparison
+                </Link>
+              </div>
+            </div>
+
+            <div className="ts-hub-bottom">
+              <Link to="/research-hub" className="ts-btn ts-btn-primary">
+                Explore Full Research Hub
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
+      {/* CORE SERVICES (matches screenshot structure) */}
+      <section className="ts-services">
+        <div className="ts-container">
+          <h3 className="ts-section-title">Our Core Services To Scale Your SaaS Business</h3>
+
+          <div className="ts-service-grid">
+            <div className="ts-service-card">
+              <div className="ts-service-ic">📘</div>
+              <h4>Product-Led Content</h4>
+              <p>
+                We create comparison and alternative pages that drive organic traffic,
+                clicks, and conversions.
+              </p>
+              <Link to="/services" className="ts-link">
+                Learn More →
+              </Link>
+            </div>
+
+            <div className="ts-service-card">
+              <div className="ts-service-ic">📈</div>
+              <h4>SaaS SEO Systems</h4>
+              <p>
+                Scalable SEO and content strategies to rank for high-intent SaaS keywords
+                and grow traffic.
+              </p>
+              <Link to="/services" className="ts-link">
+                Learn More →
+              </Link>
+            </div>
+
+            <div className="ts-service-card">
+              <div className="ts-service-ic">🔎</div>
+              <h4>Research &amp; Analysis</h4>
+              <p>
+                In-depth market research and software intelligence to guide SaaS growth
+                decisions.
+              </p>
+              <Link to="/research-hub" className="ts-link">
+                Learn More →
+              </Link>
+            </div>
+
+            <div className="ts-service-card">
+              <div className="ts-service-ic">🧲</div>
+              <h4>Demand Generation</h4>
+              <p>
+                Lead magnets, funnels, and comparison-led research to convert high-quality
+                SaaS leads.
+              </p>
+              <Link to="/contact" className="ts-link">
+                Learn More →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* KEEP YOUR EXISTING “TECH WE USE” + HomeCard (no functional changes) */}
       <section id="ser" className="ser">
         <div className="container">
           <div className="section-title" data-aos="fade-up">
-            <h3 className="text-center">Technologies we use:</h3>
+            <h4 className="text-center">Technologies we use:</h4>
             <p></p>
           </div>
         </div>
@@ -113,10 +259,10 @@ const NewHome = () => {
       <br />
       <br />
 
+      {/* KEEP YOUR EXISTING CONTACT + COUNTS SECTION */}
       <section id="counts" className="counts">
         <div className="container">
           <div className="row">
-            {/* ✅ LEFT SIDE: Contact Form (replaces missing image area) */}
             <div
               className="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start"
               data-aos="fade-right"
@@ -209,14 +355,12 @@ const NewHome = () => {
 
       <br />
 
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
 
-/** ✅ Contact form component (emails info@tecstik.com via a server endpoint) */
+/** ✅ Contact form component (mailto) — unchanged functionality */
 function HomeContactForm() {
   const [name, setName] = useState("");
   const [fromEmail, setFromEmail] = useState("");
@@ -224,51 +368,41 @@ function HomeContactForm() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState({ type: "", text: "" });
 
-const onSubmit = (e) => {
-  e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  // simple client-side validation
-  if (!name.trim() || !fromEmail.trim() || !message.trim()) {
-    setStatus({ type: "error", text: "Please fill in all fields." });
-    return;
-  }
+    if (!name.trim() || !fromEmail.trim() || !message.trim()) {
+      setStatus({ type: "error", text: "Please fill in all fields." });
+      return;
+    }
 
-  setSending(true);
-  setStatus({ type: "", text: "" });
+    setSending(true);
+    setStatus({ type: "", text: "" });
 
-  const to = "info@tecstik.com";
+    const to = "info@tecstik.com";
+    const subject = "New message from TecStik website";
 
-  // You can keep this fixed (no UI changes), or tweak the text if you want
-  const subject = "New message from TecStik website";
+    const body = [
+      `Name: ${name.trim()}`,
+      `Email: ${fromEmail.trim()}`,
+      "",
+      "What do you want to build together?",
+      message.trim(),
+      "",
+    ].join("\n");
 
-  // Required body format
-  const body = [
-    `Name: ${name.trim()}`,
-    `Email: ${fromEmail.trim()}`,
-    "",
-    "What do you want to build together?",
-    message.trim(),
-    "",
-  ].join("\n");
+    const mailtoHref = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
 
-  const mailtoHref = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
-    subject
-  )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoHref;
 
-  // Open the user's email client
-  window.location.href = mailtoHref;
-
-  // Optional: show a friendly status message (uses your existing UI)
-  setStatus({ type: "success", text: "Opening your email app…" });
-
-  // Reset fields (optional; matches your previous reset behavior)
-  setName("");
-  setFromEmail("");
-  setMessage("");
-
-  // Restore button state
-  setSending(false);
-};
+    setStatus({ type: "success", text: "Opening your email app…" });
+    setName("");
+    setFromEmail("");
+    setMessage("");
+    setSending(false);
+  };
 
   return (
     <div className="ts-home-contact">
@@ -318,9 +452,6 @@ const onSubmit = (e) => {
         {status.text ? (
           <div className={`ts-home-status ${status.type}`}>{status.text}</div>
         ) : null}
-
-        {/* fallback mailto link (optional) */}
-        
       </form>
     </div>
   );

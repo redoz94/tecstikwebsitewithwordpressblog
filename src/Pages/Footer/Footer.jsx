@@ -25,11 +25,11 @@ export default function Footer() {
     <div>
       <footer
         className="text-center text-lg-start text-white"
-        style={{ background: "#1c2331" }}
+        style={{ background: "#080B18" }}   
       >
         <section
           className="d-flex justify-content-between p-4"
-          style={{ background: "#6351ce" }}
+          style={{ background: "#080B18" }}
         >
           <div className="me-5"></div>
           <div>
@@ -159,7 +159,7 @@ export default function Footer() {
           </div>
         </section>
 
-        {/* <!-- Copyright --> */}
+        {/* Copyright */}
         <div
           className="text-center p-3"
           style={{ background: "rgba(0, 0, 0, 0.2)" }}

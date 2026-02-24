@@ -525,3 +525,36 @@
   overflow: hidden;
 }
 }
+
+/* =========================================================
+   CARD TEXT — DARKER FOR BETTER VISIBILITY
+   ========================================================= */
+
+/* Front titles */
+.ts-card-title,
+.ts-tech-title,
+.title {
+  color: #111 !important;        /* near-black */
+  font-weight: 700;
+}
+
+/* Front descriptions */
+.ts-card-text,
+.ts-tech-desc,
+.description {
+  color: #1a1a1a !important;     /* darker body text */
+  font-weight: 500;
+}
+
+/* Links inside cards */
+.ts-card a,
+.ts-tech-title a,
+.title a {
+  color: #0d2a4d !important;     /* deep tech blue */
+  font-weight: 600;
+}
+
+/* Hover state (optional premium feel) */
+.ts-card a:hover {
+  color: #1e5cff !important;
+}

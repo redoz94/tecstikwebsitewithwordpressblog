@@ -30,7 +30,7 @@ export default function HomeCard() {
                 <div className="icon-box mt-2" data-aos="fade-up" data-aos-delay="200">
                   <img src={BlockChain} alt="Blockchain" height={80} />
                   <h4 className="ts-tech-title">
-                    <Link to="/TecStik-Blockchain">Blockchain</Link>
+                    <Link to="/TecStik-Blockchain" className="y">Blockchain</Link>
                   </h4>
                   <p className="ts-tech-desc">
                     With enhanced reliability, protection, clarity, and trackability,

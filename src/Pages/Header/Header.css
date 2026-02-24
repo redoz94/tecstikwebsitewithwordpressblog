@@ -8,7 +8,11 @@
 }
 
 .ts-header.is-scrolled {
-  background: rgba(242, 242, 242, 0.92); /* your light grey, slightly transparent */
+background: rgba(7, 11, 24, 0.72);
+
+border: 1px solid rgba(255,255,255,0.08);
+
+backdrop-filter: blur(10px);  
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
 
@@ -531,4 +535,45 @@ main * {
 .ts-dropdown-menu a,
 .ts-dropdown-menu button {
   color: #111 !important;
+}
+/* =========================================================
+   NAVBAR TEXT COLOR — SCROLLED STATE
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+  /* Top-level nav items */
+  .ts-header.is-scrolled 
+  .ts-desktop-list > li > a,
+  .ts-header.is-scrolled 
+  .ts-desktop-list > li > .ts-dropdown-trigger {
+    color: #cfe3ff !important;   /* 👈 your chosen color */
+  }
+
+  /* Caret icon */
+  .ts-header.is-scrolled .ts-caret {
+    color: #cfe3ff !important;
+  }
+
+  /* Hover */
+  .ts-header.is-scrolled 
+  .ts-desktop-list > li > a:hover,
+  .ts-header.is-scrolled 
+  .ts-desktop-list > li > .ts-dropdown-trigger:hover {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* Active page */
+  .ts-header.is-scrolled 
+  .ts-desktop-list > li > a.is-active {
+    color: #9ad0ff !important;
+  }
+}
+/* Keep "Meet TecStik" on one line */
+.ts-desktop-list a,
+.ts-desktop-list button,
+.ts-nav-list a,
+.ts-nav-list button {
+  white-space: nowrap;
 }

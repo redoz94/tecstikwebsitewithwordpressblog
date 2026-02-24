@@ -32,7 +32,7 @@ const About = () => {
         {/* <img src={AboutSlider} alt="logo" class="background-image" /> */}
         <div class="overlay"></div>
         <div class="banner-text" style={{ fontSize: "2rem" }}>
-          Committed to Your Financial Productivity
+        Driving your Business Growth with Scalable Improvements
         </div>
       </section>
 
@@ -44,16 +44,31 @@ const About = () => {
               <br />
               <br />
               <h2 className="text_center">
-                INVIGORATING FINANCIAL TECHNOLOGY
+                POWERING BUSINESS TECHNOLOGY
 
               </h2>
 
               <p className="text_justify">
                 <br />
-                When a Company’s Business Strategy and Technology Strategy are intertwined, The Company Prospers. As The Technology Arm of Pacific Financial Services Pvt. Ltd. – a company operating in the international financial market for over 20 years, TecStik dedicates meticulous efforts of rigorous technology development for Business Owners and the broader market.
-                <br />
-                <br />
-                TecStik optimizes your business operations for efficiency by using Cloud-Computing, Blockchain Development, Web Development and App Development. Unlock superior workflow efficiency.  Build a Legacy of your Company’s initiatives with TecStik.
+When business strategy and technology execution operate in alignment, organizations scale faster, innovate smarter, and outperform competitors.
+
+As the technology innovation arm of Pacific Financial Services Pvt. Ltd. — a firm operating in international financial markets for over two decades — TecStik brings enterprise-grade engineering, fintech expertise, and product innovation to modern businesses worldwide.
+
+We help companies digitize operations, streamline workflows, and deploy high-performance platforms through:
+
+Cloud Computing Solutions
+
+Blockchain Development
+
+Custom Web Applications
+
+Mobile App Development
+
+Our solutions are built to enhance operational efficiency, strengthen data security, and accelerate digital transformation.
+
+           <br />
+           <br />
+           Partner with TecStik to modernize your technology infrastructure, unlock workflow automation, and build scalable digital ecosystems that drive long-term business value.     
               </p>
              
             </div>
