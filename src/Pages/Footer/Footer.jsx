@@ -1,175 +1,100 @@
 import React, { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import privacyPdf from "./PrivacyPolicy.pdf";
-import { Link } from "react-router-dom";
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import "./Footer.css";
 
 export default function Footer() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentTab = searchParams.get("tab") || "0";
-
-  const changeTab = (tab) => {
-    searchParams.set("tab", tab);
-    setSearchParams(searchParams);
-  };
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [searchParams]);
 
   return (
-    <div>
-      <footer
-        className="text-center text-lg-start text-white"
-        style={{ background: "#080B18" }}   
-      >
-        <section
-          className="d-flex justify-content-between p-4"
-          style={{ background: "#080B18" }}
-        >
-          <div className="me-5"></div>
-          <div>
-            <a href="#" className="text-white me-3" onClick={(e) => e.preventDefault()}>
-              {" "}
-              Find us online :
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=100087185961853"
-              target="_blank"
-              className="text-white me-4"
-              rel="noreferrer"
-            >
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a
-              href="https://twitter.com/Tec_Stik"
-              target="_blank"
-              className="text-white me-4"
-              rel="noreferrer"
-            >
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a
-              href="https://www.linkedin.com/company/tecstik/about/?viewAsMember=true"
-              target="_blank"
-              className="text-white me-4"
-              rel="noreferrer"
-            >
-              <i className="fab fa-linkedin"></i>
+    <footer className="ts-footer">
+
+      {/* ── Purple social strip ── */}
+      <div className="ts-footer-social">
+        <span className="ts-footer-social-label">Find us online :</span>
+        <a href="https://www.facebook.com/profile.php?id=100087185961853" target="_blank" rel="noreferrer" aria-label="Facebook">
+          <i className="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/Tec_Stik" target="_blank" rel="noreferrer" aria-label="Twitter">
+          <i className="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/tecstik/about/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <i className="fab fa-linkedin"></i>
+        </a>
+      </div>
+
+      {/* ── Main 4-column body ── */}
+      <div className="ts-footer-body">
+        <div className="ts-footer-grid">
+
+          {/* Col 1 — TecStik */}
+          <div className="ts-footer-col">
+            <h6 className="ts-footer-heading ts-footer-heading--underline">TecStik</h6>
+            <p className="ts-footer-text">
+              Ignite your business &amp; personal life with cutting-edge fintech
+              apps available on popular app stores. Experience tailored solutions
+              for growth too.
+            </p>
+          </div>
+
+          {/* Col 2 — Products */}
+          <div className="ts-footer-col">
+            <h6 className="ts-footer-heading">PRODUCTS</h6>
+            <ul className="ts-footer-list">
+              <li><Link to="/TecStik-Product">KollectIt</Link></li>
+              <li><Link to="/TecStik-Product">Ijma</Link></li>
+            </ul>
+          </div>
+
+          {/* Col 3 — Services */}
+          <div className="ts-footer-col">
+            <h6 className="ts-footer-heading">SERVICES</h6>
+            <ul className="ts-footer-list">
+              <li><Link to="/TecStik-Blockchain">Blockchain Development</Link></li>
+              <li><Link to="/TecStik-WebDevelopment">Web Development</Link></li>
+              <li><Link to="/TecStik-mobileApp">Mobile Apps Development</Link></li>
+              <li><Link to="/TecStik-Cloud">Cloud Computing</Link></li>
+            </ul>
+          </div>
+
+          {/* Col 4 — Contact */}
+          <div className="ts-footer-col">
+            <h6 className="ts-footer-heading">CONTACT</h6>
+            <ul className="ts-footer-contact-list">
+              <li>
+                <i className="fas fa-home"></i>
+                <span>Business Centre, II Chundrigar Road</span>
+              </li>
+              <li>
+                <i className="fas fa-envelope"></i>
+                <a href="mailto:info@tecstik.com">info@tecstik.com</a>
+              </li>
+              <li>
+                <i className="fas fa-phone"></i>
+                <span>+92-21 33541438</span>
+              </li>
+              <li>
+                <i className="bi bi-whatsapp"></i>
+                <span>WhatsApp: +92 335 2070555</span>
+              </li>
+            </ul>
+            <a href={privacyPdf} target="_blank" rel="noopener noreferrer" className="ts-footer-privacy">
+              Privacy Policy
             </a>
           </div>
-        </section>
 
-        <section>
-          <div className="container text-center text-md-start mt-5">
-            <div className="row mt-3">
-              <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 className="fw-bold text-white">TecStik</h6>
-                <hr
-                  className="mb-4 mt-0 d-inline-block mx-auto"
-                  style={{ background: "#7c4dff", height: 2, width: 60 }}
-                />
-                <p>
-                  Ignite your business & personal life with cutting-edge fintech
-                  apps available on popular app stores. Experience tailored
-                  solutions for growth too.
-                </p>
-              </div>
-
-              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold text-white">Products</h6>
-                <hr
-                  className="mb-4 mt-0 d-inline-block mx-auto"
-                  style={{ background: "#7c4dff", height: 2, width: 60 }}
-                />
-                <p>
-                  <Link to="/TecStik-Product" className="text-white">
-                    KollectIt
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/TecStik-Product" className="text-white">
-                    Ijma
-                  </Link>
-                </p>
-              </div>
-
-              <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold text-white ">Services </h6>
-                <hr
-                  className="mb-4 mt-0 d-inline-block mx-auto"
-                  style={{ background: "#7c4dff", height: 2, width: 60 }}
-                />
-                <p>
-                  <Link to="/TecStik-Blockchain" className="text-white">
-                    Blockchain Development
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/TecStik-WebDevelopment" className="text-white">
-                    Web Development
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/TecStik-mobileApp" className="text-white">
-                    Mobile Apps Development
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/TecStik-Cloud" className="text-white">
-                    Cloud Computing
-                  </Link>
-                </p>
-              </div>
-
-              <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 className="text-uppercase fw-bold text-white">Contact</h6>
-                <hr
-                  className="mb-4 mt-0 d-inline-block mx-auto"
-                  style={{ background: "#7c4dff", height: 2, width: 60 }}
-                />
-                <p>
-                  <i className="fas fa-home mr-3"></i> Business Centre, II
-                  Chundrigar Road
-                </p>
-                <p>
-                  <i className="fas fa-envelope mr-3"></i>
-                  <a href="mailto:info@tecstik.com" className="text-white">
-                    info@tecstik.com
-                  </a>
-                </p>
-                <p>
-                  <i className="fas fa-phone mr-3"></i> +92-21 33541438
-                </p>
-
-                <p>
-                  <i className="bi bi-whatsapp me-2"></i>
-                  WhatsApp: +92 335 2070555
-                </p>
-
-                <a href={privacyPdf} target="_blank" rel="noopener noreferrer">
-                  Privacy Policy
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Copyright */}
-        <div
-          className="text-center p-3"
-          style={{ background: "rgba(0, 0, 0, 0.2)" }}
-        >
-          © 2022 Copyright :
-          <a className="text-white ml-2" href={() => false}>
-            TecStik.com
-          </a>
         </div>
-      </footer>
-    </div>
+      </div>
+
+      {/* ── Copyright bar ── */}
+      <div className="ts-footer-copy">
+        © 2022 Copyright : TecStik.com
+      </div>
+
+    </footer>
   );
 }
