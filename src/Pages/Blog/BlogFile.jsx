@@ -173,7 +173,35 @@ export default function BlogFile() {
   const title = useMemo(() => decodeWpText(post?.title?.rendered || ""), [post]);
 
   const updated = useMemo(() => formatDate(post?.modified), [post]);
+useEffect(() => {
+  if (!post) return;
 
+  const description = decodeWpText(post?.excerpt?.rendered || "").slice(0, 160);
+  const url = `https://tecstik.com/TecStik-Blog/${slug}`;
+
+  document.title = `${title} | TecStik Blog`;
+
+  const setMeta = (name, content, prop = false) => {
+    const attr = prop ? "property" : "name";
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  };
+
+  setMeta("description", description);
+  setMeta("robots", "index, follow");
+  setMeta("og:title", title, true);
+  setMeta("og:description", description, true);
+  setMeta("og:type", "article", true);
+  setMeta("og:url", url, true);
+  if (featuredImg) setMeta("og:image", featuredImg, true);
+
+  let canonical = document.querySelector("link[rel='canonical']");
+  if (!canonical) { canonical = document.createElement("link"); canonical.setAttribute("rel", "canonical"); document.head.appendChild(canonical); }
+  canonical.setAttribute("href", url);
+
+  return () => { document.title = "TecStik"; };
+}, [post, title, featuredImg, slug]);
   const rawContent = post?.content?.rendered || "";
 
   const { toc, htmlWithIds } = useMemo(

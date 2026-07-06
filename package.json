@@ -54,14 +54,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "postbuild": "react-snap",
+    "postbuild": "node scripts/prerender.js",
     "eject": "react-scripts eject"
-  },
-  "reactSnap": {
-    "include": [
-      "/",
-      "/TecStik-Blog"
-    ]
   },
   "eslintConfig": {
     "extends": [

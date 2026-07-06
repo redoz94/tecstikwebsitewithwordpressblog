@@ -7,7 +7,7 @@ import he from "he";
 import blogHero from "../images/Blog.png";
 
 const WP_BASE = "https://tecstik.com/blog/wp-json/wp/v2";
-const CACHE_KEY = "ts_blog_posts";
+const CACHE_KEY = "tecstik_blog_posts_v1";
 const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
 const stripHtml = (html = "") => html.replace(/<[^>]*>/g, "").trim();
@@ -47,20 +47,21 @@ function writeCache(data) {
 }
 
 // ── Fetch all posts across WP pages ──────────────────────────
-async function fetchAllPosts(signal) {
-  const firstRes = await fetch(
-    `${WP_BASE}/posts?per_page=100&_embed=1&_fields=id,slug,title,excerpt,_embedded,_links&page=1`,
+async function fetchAllPosts(signal, onFirstPage) {
+   const firstRes = await fetch(
+    `${WP_BASE}/posts?per_page=100&_embed=1&page=1`,
     { signal }
   );
   if (!firstRes.ok) throw new Error("Failed to fetch posts");
   const totalPages = parseInt(firstRes.headers.get("X-WP-TotalPages") || "1", 10);
   const firstData = await firstRes.json();
+  if (onFirstPage) onFirstPage(firstData);
   if (totalPages <= 1) return firstData;
 
   const rest = await Promise.all(
     Array.from({ length: totalPages - 1 }, (_, i) =>
-      fetch(
-        `${WP_BASE}/posts?per_page=100&_embed=1&_fields=id,slug,title,excerpt,_embedded,_links&page=${i + 2}`,
+            fetch(
+        `${WP_BASE}/posts?per_page=100&_embed=1&page=${i + 2}`,
         { signal }
       ).then((r) => r.json())
     )
@@ -119,15 +120,21 @@ export default function Blog() {
     const run = async () => {
       setLoading(true);
       setErr("");
+      let gotFirstPage = false;
       try {
-        const data = await fetchAllPosts(controller.signal);
+        const data = await fetchAllPosts(controller.signal, (firstPage) => {
+          if (cancelled || !Array.isArray(firstPage)) return;
+          gotFirstPage = true;
+          setPosts(firstPage);
+          setLoading(false);
+        });
         if (!cancelled && Array.isArray(data)) {
           writeCache(data);
           setPosts(data);
         }
       } catch (e) {
         if (e.name === "AbortError") return;
-        if (!cancelled) setErr("Failed to load blogs. Please try again.");
+        if (!cancelled && !gotFirstPage) setErr("Failed to load blogs. Please try again.");
       } finally {
         if (!cancelled) setLoading(false);
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
